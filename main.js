@@ -230,13 +230,13 @@ app.post('/killffmpeg', (req, res) => {
 
 });
 
-var os = require('os-utils');
 
-os.cpuUsage(function (v) {
-	console.log('CPU Usage (%): ' + v);
-});
+// cpu uses code start
+var os = require('os-utils');
 setInterval(() => {
 	os.cpuUsage(function (v) {
 		io.emit('cpustatus', { data1:  (v * 100).toFixed(0) + '%'});
 	});
 }, 1000)
+
+// cpu uses code end
