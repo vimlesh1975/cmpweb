@@ -1,0 +1,55 @@
+<div id="fourchannelrecorder" class="collapse" data-parent="#myGroup">
+  <h3>Four Channel Recorder</h3>
+  <div style="position:fixed;left :10px;top:120px;height: 360px;width: 620px;">
+    <h3>Channel 1</h3>
+    <iframe id="fourchannelrecorder1" src="GeneralRecorder.html"
+      style="position:fixed;left :10px;top:150px;height: 360px;width: 620px;"></iframe>
+  </div>
+
+  <div style="position:fixed;left :640px;top:120px;height: 360px;width: 620px;">
+    <h3>Channel 2</h3>
+    <iframe id="fourchannelrecorder2" style="position:fixed;left :640px;top:150px;height: 360px;width: 620px;"
+      src="GeneralRecorder.html"></iframe>
+  </div>
+
+  <div style="position:fixed;left :10px;top:532px;height: 360px;width: 620px;">
+    <h3>Channel 3</h3>
+    <iframe id="fourchannelrecorder3" style="position:fixed;left :10px;top:562px;height: 360px;width: 620px;"
+      src="GeneralRecorder.html"></iframe>
+  </div>
+
+  <div style="position:fixed;left :640px;top:532px;height: 360px;width: 620px;">
+    <h3>Channel 4</h3>
+    <iframe id="fourchannelrecorder4" style="position:fixed;left :640px;top:562px;height: 360px;width: 620px;"
+      src="GeneralRecorder.html"></iframe>
+  </div>
+
+</div>
+<script>
+  function myFunction1234() {
+    //document.getElementById('fourchannelrecorder1').contentWindow.flvplayerstart();
+
+    var x2 = document.getElementById("fourchannelrecorder2");
+    var y2 = x2.contentDocument;
+    y2.getElementById("decklinknumber").value = 2;
+    document.getElementById('fourchannelrecorder2').contentWindow['recordingchannelnumner'] = 2;
+    //document.getElementById('fourchannelrecorder2').contentWindow.flvplayerstart();
+
+    var x3 = document.getElementById("fourchannelrecorder3");
+    var y3 = x3.contentDocument;
+    y3.getElementById("decklinknumber").value = 3;
+    document.getElementById('fourchannelrecorder3').contentWindow['recordingchannelnumner'] = 3;
+    //document.getElementById('fourchannelrecorder3').contentWindow.flvplayerstart();
+
+    var x4 = document.getElementById("fourchannelrecorder4");
+    var y4 = x4.contentDocument;
+    y4.getElementById("decklinknumber").value = 4;
+    document.getElementById('fourchannelrecorder4').contentWindow['recordingchannelnumner'] = 4;
+    //document.getElementById('fourchannelrecorder3').contentWindow.flvplayerstart();
+
+  }
+  setTimeout(function () { myFunction1234() }, 1000);
+
+
+ 
+</script>

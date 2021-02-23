@@ -1,0 +1,366 @@
+<style>
+  #recorder1 {
+    width: 605px;
+    height: 340px;
+    font-size: 14px;
+    font-weight: bold;
+    background: LightGoldenRodYellow;
+    box-shadow: 2px 2px 15px blue;
+    position: absolute;
+    left: 0px;
+</style>
+
+
+<div id="recorder1">
+  <table border=1 style="border-collapse: collapse;left:10px;top:30px">
+    General Recording File
+    <tr>
+      <td>Decklink </td>
+      <td><select id="decklinknumber">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+        </select></td>
+    </tr>
+
+    <tr>
+      <td> <input type="button" value="Show Input" onclick="showinput()"> </td>
+      <td> <input type="button" value="Remove Input" onclick="removeinput()"> </td>
+    </tr>
+
+    <tr>
+      <td><button style="background-color:green;color:white;" onclick="recordincasparcg()">Record</button> </td>
+      <td><button style="background-color:red;color:white;" onclick="stoprecordincasparcg()">Stop Record</button> <br>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td> File length in second</td>
+      <td><input type="input" value="3600" style="width: 50px" onclick=""> <input type="checkbox" id="checkbox_1"
+          checked="true"><label for="checkbox_1"> Sigle Cilp</label>
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>Bit Rate Mbps</td>
+      <td> <input type="input" value="8" style="width: 50px" onclick=""><br></td>
+    </tr>
+
+
+    <tr>
+      <td>File Format </td>
+      <td><select id="fileextension">
+          <option>avi</option>
+          <option>dv</option>
+          <option>mov</option>
+          <option selected="true">mp4</option>
+          <option>mxf</option>
+          <option>ogg</option>
+          <option>ts</option>
+        </select></td>
+    </tr>
+
+
+    <tr>
+      <td>File name</td>
+      <td><input type="input" id="recordingfilename" value="test" style="width: 150px; text-align: center;" onclick="">
+      </td>
+    </tr>
+
+    <tr>
+      <td> <input type="button" value="Select Folder" onclick=""> </td>
+      <td>c:/casparcg/_media</td>
+    </tr>
+  </table>
+
+
+
+  <label style="position: absolute; left: 180px; top: 0px">d:\casparcg erver020715\Casparcg Server\Server\media</label>
+  <input type="button" value="Locate" style="position: absolute; right: 30px; top: 0px" onclick="">
+  <input type="button" value="X" style="position: absolute; background: red; right: 0px; top: 0px"
+    onclick="$('#recorder1').remove()">
+  <table style="position: absolute; left: 310px; top: 30px; border-collapse: collapse;" border="1px">
+    <tr>
+      <td>Duration</td>
+      <td style="color: red;"> Duration</td>
+    </tr>
+    <tr>
+      <td>File Size</td>
+      <td style="color: red;">Size</td>
+    </tr>
+    <tr>
+      <td>Free Space</td>
+      <td style="color: red;">Free Space</td>
+    </tr>
+  </table>
+
+  <table style="position: absolute; left:0px; top: 210px; border-collapse: collapse;" border="1px">
+    <tr>
+      <th>Profile</th>
+      <th>Video Codec</th>
+      <th>Audio Codec</th>
+    </tr>
+    <tr>
+      <td>
+        <select>
+          <option value="dvcam">dvcam</option>
+          <option value="dvcpro">dvcpro</option>
+          <option value="dvcpro50" selected="true">dvcpro50</option>
+          <option value="dvcproHD">dvcproHD</option>
+          <option value="AlphaVideo">AlphaVideo</option>
+          <option value="H264">H264</option>
+          <option value="H265">H265</option>
+          <option value="XDCAMHD422">XDCAMHD422</option>
+          <option value="IMX30">IMX30</option>
+          <option value="IMX40">IMX40</option>
+          <option value="IMX50">IMX50</option>
+        </select>
+      </td>
+      <td>
+        <select>
+          <option value="a64multi">a64multi</option>
+          <option value="a64multi5">a64multi5</option>
+          <option value="alias_pix">alias_pix</option>
+          <option value="amv">amv</option>
+          <option value="apng">apng</option>
+          <option value="asv1">asv1</option>
+          <option value="asv2">asv2</option>
+          <option value="avrp">avrp</option>
+          <option value="avui">avui</option>
+          <option value="ayuv">ayuv</option>
+          <option value="bmp">bmp</option>
+          <option value="cinepak">cinepak</option>
+          <option value="cljr">cljr</option>
+          <option value="dnxhd">dnxhd</option>
+          <option value="dpx">dpx</option>
+          <option value="dvvideo" selected="true">dvvideo</option>
+          <option value="ffv1">ffv1</option>
+          <option value="ffvhuff">ffvhuff</option>
+          <option value="flashsv">flashsv</option>
+          <option value="flashsv2">flashsv2</option>
+          <option value="flv">flv</option>
+          <option value="gif">gif</option>
+          <option value="h261">h261</option>
+          <option value="h263">h263</option>
+          <option value="h263p">h263p</option>
+          <option value="huffyuv">huffyuv</option>
+          <option value="jpeg2000">jpeg2000</option>
+          <option value="jpegls">jpegls</option>
+          <option value="libopenjpeg">libopenjpeg</option>
+          <option value="libschroedinger">libschroedinger</option>
+          <option value="libtheora">libtheora</option>
+          <option value="libvpx">libvpx</option>
+          <option value="libvpx-vp9">libvpx-vp9</option>
+          <option value="libwebp">libwebp</option>
+          <option value="libx264">libx264</option>
+          <option value="libx264rgb">libx264rgb</option>
+          <option value="libx265">libx265</option>
+          <option value="libxavs">libxavs</option>
+          <option value="libxvid">libxvid</option>
+          <option value="ljpeg">ljpeg</option>
+          <option value="mjpeg">mjpeg</option>
+          <option value="mpeg1video">mpeg1video</option>
+          <option value="mpeg2video">mpeg2video</option>
+          <option value="mpeg4">mpeg4</option>
+          <option value="msmpeg4">msmpeg4</option>
+          <option value="msmpeg4v2">msmpeg4v2</option>
+          <option value="msvideo1">msvideo1</option>
+          <option value="pam">pam</option>
+          <option value="pbm">pbm</option>
+          <option value="pcx">pcx</option>
+          <option value="pgm">pgm</option>
+          <option value="pgmyuv">pgmyuv</option>
+          <option value="png">png</option>
+          <option value="ppm">ppm</option>
+          <option value="prores">prores</option>
+          <option value="prores_aw">prores_aw</option>
+          <option value="prores_ks">prores_ks</option>
+          <option value="qtrle">qtrle</option>
+          <option value="r10k">r10k</option>
+          <option value="r210">r210</option>
+          <option value="rawvideo">rawvideo</option>
+          <option value="roqvideo">roqvideo</option>
+          <option value="rv10">rv10</option>
+          <option value="rv20">rv20</option>
+          <option value="sgi">sgi</option>
+          <option value="snow">snow</option>
+          <option value="sunrast">sunrast</option>
+          <option value="svq1">svq1</option>
+          <option value="targa">targa</option>
+          <option value="tiff">tiff</option>
+          <option value="utvideo">utvideo</option>
+          <option value="v210">v210</option>
+          <option value="v308">v308</option>
+          <option value="v408">v408</option>
+          <option value="v410">v410</option>
+          <option value="wmv1">wmv1</option>
+          <option value="wmv2">wmv2</option>
+          <option value="xbm">xbm</option>
+          <option value="xface">xface</option>
+          <option value="xwd">xwd</option>
+          <option value="y41p">y41p</option>
+          <option value="yuv4">yuv4</option>
+          <option value="zlib">zlib</option>
+          <option value="zmbv">zmbv</option>
+        </select>
+      </td>
+      <td>
+        <select>
+          <option value="aac">aac</option>
+          <option value="ac3">ac3</option>
+          <option value="ac3_fixed">ac3_fixed</option>
+          <option value="adpcm_adx">adpcm_adx</option>
+          <option value="adpcm_ima_qt">adpcm_ima_qt</option>
+          <option value="adpcm_ima_wav">adpcm_ima_wav</option>
+          <option value="adpcm_ms">adpcm_ms</option>
+          <option value="adpcm_swf">adpcm_swf</option>
+          <option value="adpcm_yamaha">adpcm_yamaha</option>
+          <option value="alac">alac</option>
+          <option value="comfortnoise">comfortnoise</option>
+          <option value="eac3">eac3</option>
+          <option value="flac">flac</option>
+          <option value="g722">g722</option>
+          <option value="g723_1">g723_1</option>
+          <option value="g726">g726</option>
+          <option value="libgsm">libgsm</option>
+          <option value="libgsm_ms">libgsm_ms</option>
+          <option value="libilbc">libilbc</option>
+          <option value="libmp3lame">libmp3lame</option>
+          <option value="libopencore_amrnb">libopencore_amrnb</option>
+          <option value="libopus">libopus</option>
+          <option value="libspeex">libspeex</option>
+          <option value="libtwolame">libtwolame</option>
+          <option value="libvo_aacenc">libvo_aacenc</option>
+          <option value="libvo_amrwbenc">libvo_amrwbenc</option>
+          <option value="libvorbis">libvorbis</option>
+          <option value="libwavpack">libwavpack</option>
+          <option value="mp2">mp2</option>
+          <option value="mp2fixed">mp2fixed</option>
+          <option value="nellymoser">nellymoser</option>
+          <option value="pcm_alaw">pcm_alaw</option>
+          <option value="pcm_f32be">pcm_f32be</option>
+          <option value="pcm_f32le">pcm_f32le</option>
+          <option value="pcm_f64be">pcm_f64be</option>
+          <option value="pcm_f64le">pcm_f64le</option>
+          <option value="pcm_mulaw">pcm_mulaw</option>
+          <option value="pcm_s16be">pcm_s16be</option>
+          <option value="pcm_s16be_planar">pcm_s16be_planar</option>
+          <option value="pcm_s16le" selected="true">pcm_s16le</option>
+          <option value="pcm_s16le_planar">pcm_s16le_planar</option>
+          <option value="pcm_s24be">pcm_s24be</option>
+          <option value="pcm_s24daud">pcm_s24daud</option>
+          <option value="pcm_s24le">pcm_s24le</option>
+          <option value="pcm_s24le_planar">pcm_s24le_planar</option>
+          <option value="pcm_s32be">pcm_s32be</option>
+          <option value="pcm_s32le">pcm_s32le</option>
+          <option value="pcm_s32le_planar">pcm_s32le_planar</option>
+          <option value="pcm_s8">pcm_s8</option>
+          <option value="pcm_s8_planar">pcm_s8_planar</option>
+          <option value="pcm_u16be">pcm_u16be</option>
+          <option value="pcm_u16le">pcm_u16le</option>
+          <option value="pcm_u24be">pcm_u24be</option>
+          <option value="pcm_u24le">pcm_u24le</option>
+          <option value="pcm_u32be">pcm_u32be</option>
+          <option value="pcm_u32le">pcm_u32le</option>
+          <option value="pcm_u8">pcm_u8</option>
+          <option value="real_144">real_144</option>
+          <option value="roq_dpcm">roq_dpcm</option>
+          <option value="tta">tta</option>
+          <option value="wavpack">wavpack</option>
+          <option value="wmav1">wmav1</option>
+          <option value="wmav2">wmav2</option>
+        </select>
+      </td>
+    </tr>
+  </table>
+
+
+  <textarea id="RecordingParameter" rows="4" cols="45" style="position: absolute; right: 0px; top: 260px;left: 0px;">
+-vcodec libx264 -acodec aac -strict -2
+</textarea>
+
+  <div style="position:absolute;left:390px;top:155px; width:200px;height: 150px;">
+    <button onclick="startpreview()">Start Preview</button> <button onclick="Refreshreview()">Refresh</button> <button
+      onclick="stoppreview()">Stop</button> <br />
+    <video id="videoElementgeneralrecorder" style="width:200px;height: 150px;" controls autoplay muted></video>
+  </div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+<script>
+
+
+  var recordingchannelnumner = 1;
+
+
+  function recordincasparcg() {
+    $.post("endpoint", {
+      cmd: 'add ' + recordingchannelnumner + ' file ' + document.getElementById('recordingfilename').value + '.' + document.getElementById('fileextension').value + " " + document.getElementById('RecordingParameter').value
+    },
+      function (data, status) {
+      });
+  }
+
+  function stoprecordincasparcg() {
+    $.post("endpoint", {
+      cmd: 'remove ' + recordingchannelnumner + ' file ' + document.getElementById('recordingfilename').value + '.' + document.getElementById('fileextension').value
+    },
+      function (data, status) {
+      });
+  }
+  function showinput() {
+    $.post("endpoint", {
+      cmd: 'play ' + recordingchannelnumner + '-1 decklink ' + document.getElementById('decklinknumber').value + " embedded_audio"
+    },
+      function (data, status) {
+      });
+  }
+  function removeinput() {
+    $.post("endpoint", {
+      cmd: 'stop ' + recordingchannelnumner + '-1'
+    },
+      function (data, status) {
+      });
+  }
+
+  var flvPlayer;
+  function flvplayerstart() {
+    if (flvjs.isSupported()) {
+      var videoElement = document.getElementById('videoElementgeneralrecorder');
+      flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        url: 'http://localhost:8001/live/' + recordingchannelnumner + '.flv'
+      });
+      flvPlayer.attachMediaElement(videoElement);
+      flvPlayer.load();
+      flvPlayer.play();
+    }
+  }
+
+  function startpreview() {
+    stoppreview();
+    if (parent.ServerVersion == 2.3) {
+      setTimeout(parent.sendstring('add ' + recordingchannelnumner + ' stream rtmp://localhost/live/' + recordingchannelnumner + ' -codec:v libx264 -codec:a aac -strict -2  -b:a 128k -x264opts:v keyint=45 -ar:a 48000 -tune:v zerolatency -preset:v ultrafast -b:v 1500k -minrate:v 1500k -maxrate:v 1500k -bufsize:v 1500k -filter:v format=pix_fmts=yuv420p,scale=400:300 -filter:a pan=stereo|c0=c0|c1=c1 -format flv'), 200);
+    }
+    else {
+      setTimeout(parent.sendstring('add ' + recordingchannelnumner + ' stream rtmp://localhost/live/' + recordingchannelnumner + ' -codec:v libx264  -codec:a aac -strict -2  -b:a 128k -x264opts:v keyint=45 -ar:a 48000 -tune:v zerolatency -preset:v ultrafast -b:v 500k -minrate:v 500k -maxrate:v 500k -bufsize:v 500k -vf format=pix_fmts=yuv420p,scale=400:300 -format flv'), 200);
+
+    }
+  }
+
+  function stoppreview() {
+    parent.sendstring('remove ' + recordingchannelnumner + ' stream rtmp://localhost/live/' + recordingchannelnumner);
+
+  }
+  function Refreshreview() {
+    setTimeout(flvPlayer.unload(), 300);
+    setTimeout(flvPlayer.load(), 700);
+    setTimeout(flvPlayer.play(), 1500);
+  }
+
+</script>

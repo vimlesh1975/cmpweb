@@ -1,0 +1,81 @@
+<div id="VideoServer" class="collapse" data-parent="#myGroup">
+    <h3>Video Server</h3>
+    <div id="playlist" style="background-color: rgb(135, 190, 222);">
+
+        <h3>Playlist</h3>
+        <button type="button" onclick="playclip()" class="btn btn-success">Play Clip</button>
+        <button type="button" onclick="startplaylist()" class="btn btn-success">Satrt Playlist</button>
+        <button type="button" onclick="stopplaylist()" class="btn btn-danger">Stop Playlist</button>
+
+        <div style="overflow:scroll;height: 400px;">
+            <table contenteditable border="1" bordercolor="red" 
+                id="tblplaylist">
+                <tr>
+                    <th>File Name</th><th>Start_Time</th><th>Play</th><th>Duration</th><th>Cnvrsn</th><th>File Type</th><th>Loop</th><th>Thumbnail</th><th>Transition</th><th>Frame</th><th>Follow Duration</th><th>Audio Level</th><th>Filter</th><th>Template File</th><th>Back In</th><th>AMCP Commends</th>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">go1080p25.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">CG1080i50.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">amb.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">CG1080i50_A.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">go1080p25.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">CG1080i50.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+                <tr>
+                    <td ondrop="drop(event)" ondragover="allowDrop(event)">amb.mp4</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="background-color: burlywood;">
+        <h3>Clip Grid</h3>
+        <button type="button" onclick="getcliplist('cls')" id="btngetcliplist" class="btn btn-info">Get clip
+            list</button>
+
+        <button type="button" onclick="playclipfromclipgrid()" class="btn btn-success">Play Clip</button>
+        <br />
+        <div style="overflow:scroll;height: 350px;">
+
+            <table border=1  size="5" id="tblclipgrid">
+                <tr>
+                    <th>File Name</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            //ev.dataTransfer.setData("text", ev.target.id);
+            ev.dataTransfer.setData("text", ev.target.innerHTML);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            //ev.target.appendChild(document.getElementById(data));
+            ev.target.innerHTML = data;
+            //alert(ev.target);
+        }
+    </script>
+
+
+
+  
+</div>

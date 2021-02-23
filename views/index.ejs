@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<%- include('header'); %>
+  <body>
+    <%- include('nav'); %>
+      <div style="background-color: #C0FFFF;">
+        Host <input id="host" style="max-width: 140px;" value="127.0.0.1" />Port <input style="max-width: 50px;"
+          id="port" value="5250" />
+        <button class="btn btn-danger" id="connecttocasparcg" onclick="connecttocasparcg()">Connect</button>
+      </div>
+
+      <div id="myGroup" class="container-fluid  col-sm-8" style="position:fixed;left:0px;">
+
+              <%- include('VideoServer'); %>
+              <%- include('Playfromanywhere'); %>
+              <%- include('template'); %>
+              <%- include('htmltemplate'); %>
+              <%- include('GeneralRecorder'); %>
+              <%- include('fourchannelrecorder'); %>
+              <%- include('offairlogger'); %>
+              <%- include('fourchanneloffairlogger'); %>
+              <%- include('Trimming_Transcoding'); %>
+              <%- include('CG1'); %>
+              <%- include('CG2'); %>
+              <%- include('Oneliner'); %>
+              <%- include('Twoliner'); %>
+              <%- include('PPT'); %>
+              <%- include('Watermarking'); %>
+              <%- include('Quiz'); %>
+              <%- include('Weather'); %>
+              <%- include('ScrollAndBreakingNews'); %>
+              <%- include('HtmlScroller'); %>
+              <%- include('MultibulletScroller'); %>
+              <%- include('ImageScroller'); %>
+              <%- include('HorizontalScroller1'); %>
+              <%- include('HorizontalScroller2'); %>
+              <%- include('RssFeedasScrollBreakingNewsAndClock'); %>
+              <%- include('SceneScroller'); %>
+              <%- include('verticalscroll1'); %>
+              <%- include('verticalscroll2'); %>
+              <%- include('NationalGameskerla2015'); %>
+              <%- include('SouthAsianGamesGuwahati2016'); %>
+              <%- include('Cricket'); %>
+              <%- include('DaviceCup'); %>
+              <%- include('OnScreenDrawing'); %>
+              <%- include('WeightLifting'); %>
+              <%- include('mam/mam'); %>
+              <%- include('XdcamSoapClient'); %>
+              <%- include('VDCPController'); %>
+              <%- include('UDPChat'); %>
+              <%- include('Metadata'); %>
+              <%- include('XdcamControllers'); %>
+              <%- include('YoutubeLiveManagement'); %>
+              <%- include('Streaming'); %>
+              <%- include('StreamPlayer'); %>
+              <%- include('SRTPlayer'); %>
+              <%- include('SongSubtitling'); %>
+              <%- include('SlowMotioninServer21'); %>
+              <%- include('slowmotioninJstarserver'); %>
+              <%- include('facebook'); %>
+              <%- include('Twitter'); %>
+              <%- include('HTMLorInternet'); %>
+              <%- include('VLCStreamtester'); %>
+              <%- include('VLC4channelPreview'); %>
+              <%- include('Mixer'); %>
+              <%- include('VisionMixer'); %>
+              <%- include('osc'); %>
+              <%- include('SilenceDetector'); %>
+              <%- include('Election'); %>
+              <%- include('Timers'); %>
+              <%- include('DBFSMeter16Channel'); %>
+              <%- include('cctv'); %>
+              <%- include('CommandScheduler'); %>
+              <%- include('commandschedulerDatewise'); %>
+              <%- include('SQLTest'); %>
+              <%- include('WEBSocketserver'); %>
+              <%- include('FullpageCaption'); %>
+              <%- include('remotelogging'); %>
+              <%- include('tabPages'); %>
+              <%- include('composition'); %>
+              <%- include('templatePlaylist'); %>
+
+
+      </div>
+
+      <!-- Casparc cg windows start -->
+      <div class="container-fluid  col-sm-4"
+        style="background-color:rgb(188, 243, 238);position:fixed;left:1265px;height: 1000px;top:0px">
+        <%- include('Casparccgwindows'); %>
+      </div>
+
+      <!-- tab pages  start -->
+      <div class="container-fluid  col-sm-4" style="position:fixed;left:1265px;top:500px">
+        <%- include('tabs/nav2'); %>
+      </div>
+      <div id="myGroup2" class="container-fluid  col-sm-4" style="position:fixed;left:1265px;top:550px">
+        <%- include('tabs/utility'); %>
+          <%- include('tabs/channelinfo'); %>
+            <%- include('tabs/screenconsumer'); %>
+              <%- include('tabs/playlistschedule'); %>
+                <%- include('tabs/amcp'); %>
+                  <%- include('tabs/swfplayer'); %>
+                    <%- include('tabs/playlistsetting'); %>
+                      <%- include('tabs/logo'); %>
+                        <%- include('tabs/audiopngpositionsize'); %>
+      </div>
+
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+      <script src='global.js'></script>
+
+      <script>
+        setTimeout(function () { getserverversion() }, 100);
+        // setTimeout(function () { getcliplist('cls') }, 200);
+        // setTimeout(function () { gettemplatelist('tls') }, 300);
+        setInterval(function () {
+          var aa = new Date();
+          $('#casparcgclock').html(aa.getHours().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + ":" + aa.getMinutes().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + ":" + aa.getSeconds().toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }));
+
+        }, 1000);
+        //document.getElementById('lnkfourchannelrecorder').click();
+        //document.getElementById('lnkVideoServer').click();
+        //document.getElementById('lnkosc').click();
+        document.getElementById('lnkamcp').click();
+        //document.getElementById('lnkGeneralRecorder').click();
+        document.getElementById('lnkPlayfromanywhere').click();
+
+        //document.getElementById('lnkmam').click();
+
+      </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,103 @@
+<div div id="Playfromanywhere" class="collapse" data-parent="#myGroup">
+    <h3>Play From Anywhre</h3>
+    <div style="background-color: burlywood;">
+
+        <input type="text" value="c:/casparcg/_media" id='anywheredirectory'></input>
+        <button type="button" onclick="getfilesforanywhere($('#anywheredirectory').val())" class="btn btn-info">Get clip
+            list</button>
+
+        <button type="button" onclick="playclipfromclipgridforanywhere()" class="btn btn-success">Play Clip</button>
+
+        <div style="position: absolute;left:425px">
+            <button type="button" onclick="transcode($('tr.selected3 td:first').text())"
+                class="btn btn-success">Transcode</button>
+
+            <button type="button" onclick="$.post('pauseffmpeg')" class="btn btn-success">Pause</button>
+
+            <button type="button" onclick="$.post('resumeffmpeg')" class="btn btn-success">Resume</button>
+
+            <button type="button" onclick="$.post('killffmpeg')" class="btn btn-success">Kill</button>
+
+            <br />
+            <table border=1 style="min-width: 750px;max-width: 775px;">
+                <colgroup>
+                    <col span="1" style="width: 12%;">
+                    <col span="1" style="width: 88%;">
+                 </colgroup>
+
+                <tr>
+                    <td>Original File</td>
+                    <td id="originalfile1"></td>
+                </tr>
+                <tr>
+                    <td>Transcoded File</td>
+                    <td id="transcodedfile1"></td>
+                </tr>
+
+                <tr>
+                    <td>progress:</td>
+                    <td><progress id="transcodeprogress1" value="0" max="100"> 0% </progress><span id="percentvalue1"> </span></td>
+                </tr>
+                <tr>
+                    <td>status:</td>
+                    <td id="transcodestatus1">transcodestatus1</td>
+                </tr>
+            </table>
+
+            <br />
+        
+        </div>
+
+
+        <div style="overflow:scroll;height:800px;">
+
+            <table border=1 size="5" id="tblclipgridforanywhere">
+                <tr>
+                    <th>File Name</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        function getfilesforanywhere(str) {
+
+            $.post("/getfilesforanywhere", {
+                cmd: str
+            },
+                function (data, status) {
+                    $('#tblclipgridforanywhere').empty();
+                    var aa = data;
+                    for (var i = 0; i < aa.length; i++) {
+                        if (aa[i] !== undefined) {
+                            inesrtintoclipgridforanywhere((aa[i]));
+                        }
+                    }
+                });
+
+        }
+        function inesrtintoclipgridforanywhere(str) {
+            var table = document.getElementById("tblclipgridforanywhere");
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(-1);
+            cell1.innerHTML = (str.toString()).replaceAll("\\", "/");
+
+        }
+
+        function playclipfromclipgridforanywhere() {
+
+            sendstring('play 1-1 "' + ($("tr.selected3 td:first").text()).replaceAll(":/", "://") + '"');
+        }
+
+        function transcode(str) {
+            $.post("/transcode", {
+                cmd: str
+            },
+            );
+        }
+
+    </script>
+
+
+</div>

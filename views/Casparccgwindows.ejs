@@ -1,0 +1,76 @@
+<div style="background-color:#C0FFFF;height:75px">
+    <div>
+        <table id='tblversion' style="font-size:x-small;   border: 0px solid white;">
+            <tr>
+                <td onclick="getserverversion()">Server</td>
+                <td>version</td>
+            </tr>
+        </table>
+    </div>
+    <div id='casparcgcountdown'
+        style="position:fixed;left :1500px;top:0px;background-color: green;color:yellow;height: 45px;text-align:center;font-size: 30px;">
+        00:00:00:00</div>
+
+    <div id='casparcgclock'
+        style="position:fixed;left :1750px;height: 200px;top:0px;background-color: yellow;color:green;height: 45px;text-align:center;font-size: 30px;">
+        00:00:00</div>
+    <button onclick="startpreview()">Start Preview</button> <button onclick="Refreshreview()">Refresh</button>  <button onclick="stoppreview()">Stop</button> 
+
+</div>
+<div style="position:fixed;left :1500px;top: 72px;">
+    <span id="currentclip"></span><br />
+
+    <input id="audiobar1" style="width:200px;transform: rotate(270deg);position:fixed;left :1390px;top: 167px;"
+        type="range" name="rng" min="-190" max="-0" step="0.25" value="-10" />
+    <video id="videoElement" style="width:300px;height: 200px;" controls autoplay muted></video>
+    <input id="audiobar2" style="width:200px;transform: rotate(270deg);position:fixed;left :1710px;top: 167px;"
+        type="range" name="rng" min="-190" max="-0" step="0.25" value="-10" /><br />
+
+    <span id="currentframe">currentframe</span>
+    <input id="input2" style="width:250px;" type="range" name="rng" min="0" step="1" value="0"
+        onchange="mSet(this.value)" /> <span id="totalframe">totalframe</span></br>
+
+    <script>
+        function mSet(str) {
+            stoppreview();
+            if (ServerVersion == 2.3) {
+                sendstring("load 1-1 " + currentclip + " seek " + str * 2);
+            }
+            else {
+                sendstring("load 1-1 " + currentclip + " seek " + str);
+            }
+
+        }
+        function startpreview() {
+            stoppreview();
+            if (ServerVersion == 2.3) {
+                setTimeout( sendstring('add 1 stream rtmp://localhost/live/STREAM_NAME -codec:v libx264 -codec:a aac -strict -2  -b:a 128k -x264opts:v keyint=45 -ar:a 48000 -tune:v zerolatency -preset:v ultrafast -b:v 1500k -minrate:v 1500k -maxrate:v 1500k -bufsize:v 1500k -filter:v format=pix_fmts=yuv420p,scale=400:300 -filter:a pan=stereo|c0=c0|c1=c1 -format flv'),200);
+            }
+            else {
+                setTimeout(  sendstring('add 1 stream rtmp://localhost/live/STREAM_NAME -codec:v libx264  -codec:a aac -strict -2  -b:a 128k -x264opts:v keyint=45 -ar:a 48000 -tune:v zerolatency -preset:v ultrafast -b:v 500k -minrate:v 500k -maxrate:v 500k -bufsize:v 500k -vf format=pix_fmts=yuv420p,scale=400:300 -format flv'),200);
+            }
+        }
+
+        function stoppreview() {
+            sendstring('remove 1 stream rtmp://localhost/live/STREAM_NAME');
+        }
+        function Refreshreview() {
+           setTimeout( flvPlayer.unload(), 300);
+           setTimeout( flvPlayer.load(), 700);
+           setTimeout( flvPlayer.play(), 1500);
+        }
+
+
+    </script>
+
+    <i onclick="pauseclip()" class="fa fa-pause" style="font-size:30px;color:black;" data-toggle="tooltip"
+        data-placement="top" title="PAUSE"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i onclick="resumeclip()" class="fa fa-play" style="font-size:30px;color:black;" data-toggle="tooltip"
+        data-placement="top" title="RESUME"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <i onclick="stopclip()" class="fa fa-stop" style="font-size:30px;color:black;" data-toggle="tooltip"
+        data-placement="top" title="STOP"></i>
+
+    <br />
+    <br />
+
+</div>

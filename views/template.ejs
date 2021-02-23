@@ -1,0 +1,20 @@
+<div id="template" class="collapse" data-parent="#myGroup">
+    <h3>Flash Template</h3>
+    <button type="button" onclick="gettemplatelist('tls')" id="btngettemplatelist" class="btn btn-primary">Get
+        template list</button>
+    <i onclick="playtemplate()" class="fa fa-play"
+        style="font-size:40px;color:black;position: relative;top: 10px;left: 10px;" data-toggle="tooltip"
+        data-placement="top" title="Play"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+    <button type="button" onclick="updatetemplate()" class="btn btn-primary">Update </button>
+    <i onclick="stoptemplate()" class="fa fa-stop"
+        style="font-size:40px;color:black;position: relative;top: 10px;left: 10px;" data-toggle="tooltip"
+        data-placement="top" title="Stop"></i><br />
+    <select onChange="gettemplatevariables()" style="min-width:500px;max-width:500px;min-height:500px;max-height:500px;"
+        size="5" id="lsttemplate">
+        <!-- all templates -->
+    </select>
+
+    <table contenteditable border="1" bordercolor="red"
+        style="min-width:400px;max-width:400px;min-height:500;max-height:500px; position: relative;left: 550px;top:-500px;"
+        id="templatevariables"></table>
+</div>

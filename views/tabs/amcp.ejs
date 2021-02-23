@@ -1,0 +1,157 @@
+<div class="collapse" id="amcp" data-parent="#myGroup2" >
+    <textarea id="input1" rows="5" cols="50" >Play 1-1 go1080p25 loop
+cg 1-2 add 2 cmp/cg_template/clock 1</textarea>
+    <i onclick="sendstring(document.getElementById(`input1`).value)" class="fa fa-paper-plane"
+        style="font-size:40px;color:black;position:relative;top: -60px;" data-toggle="tooltip" data-placement="top"
+        title="Send Command"></i><br />
+        <select id='cmbamcp'>
+            <option value="ADD 1 AUDIO">ADD 1 AUDIO</option>
+            <option value="ADD 1 BLUEFISH 1">ADD 1 BLUEFISH 1</option>
+            <option value="ADD 1 DECKLINK 1">ADD 1 DECKLINK 1</option>
+            <option value="add 1 decklink 1 keyer_internal">add 1 decklink 1 keyer_internal</option>
+            <option value="ADD 1 EMBEDDED_AUDIO">ADD 1 EMBEDDED_AUDIO</option>
+            <option value="ADD 1 FILE FILENAME.MP4 SEPARATE_KEY">ADD 1 FILE FILENAME.MP4 SEPARATE_KEY</option>
+            <option value="add 1 file xyz.mxf mono_streams">add 1 file xyz.mxf mono_streams</option>
+            <option value="ADD 1 IMAGE FILENAME">ADD 1 IMAGE FILENAME</option>
+            <option value="ADD 1 NDI">ADD 1 NDI</option>
+            <option value="add 1 ndi name ch1">add 1 ndi name ch1</option>
+            <option value="add 1 ndi name ch1 allow_fields">add 1 ndi name ch1 allow_fields</option>
+            <option value="ADD 1 newtek_ivga">ADD 1 newtek_ivga</option>
+            <option value="ADD 1 SCREEN 0">ADD 1 SCREEN 0</option>
+            <option value="ADD 1 SCREEN 0 FULLSCREEN">ADD 1 SCREEN 0 FULLSCREEN</option>
+            <option value="ADD 1 SCREEN 0 INTERACTIVE">ADD 1 SCREEN 0 INTERACTIVE</option>
+            <option value="ADD 1 SCREEN 0 NON_INTERACTIVE">ADD 1 SCREEN 0 NON_INTERACTIVE</option>
+            <option value="ADD 1 SCREEN 0 WINDOWED">ADD 1 SCREEN 0 WINDOWED</option>
+            <option value="ADD 1 SCREEN 1 name Preview">ADD 1 SCREEN 1 name Preview</option>
+            <option value="ADD 1 SCREEN 1 NO_AUTO_DEINTERLACE">ADD 1 SCREEN 1 NO_AUTO_DEINTERLACE</option>
+            <option value="Add 1 screen 2 key_only">Add 1 screen 2 key_only</option>
+            <option value="add 2 ndi name ch2">add 2 ndi name ch2</option>
+            <option value="ADD 2 SCREEN 0">ADD 2 SCREEN 0</option>
+            <option value="add 3 ndi name ch3">add 3 ndi name ch3</option>
+            <option value="add 4 ndi name ch4">add 4 ndi name ch4</option>
+            <option value="BYE">BYE</option>
+            <option value="call 1-1 framerate speed 0.3">call 1-1 framerate speed 0.3</option>
+            <option value="CALL 1-1 LOOP 0">CALL 1-1 LOOP 0</option>
+            <option value="CALL 1-1 LOOP 1">CALL 1-1 LOOP 1</option>
+            <option value="call 1-1 seek -30 rel">call 1-1 seek -30 rel</option>
+            <option value="call 1-1 seek 30 end">call 1-1 seek 30 end</option>
+            <option value="call 1-1 seek 30 rel">call 1-1 seek 30 rel</option>
+            <option value="CHANNEL_GRID">CHANNEL_GRID</option>
+            <option value="CLS">CLS</option>
+            <option value="DATA LIST">DATA LIST</option>
+            <option value="DATA REMOVE my_data">DATA REMOVE my_data</option>
+            <option value="DATA RETRIEVE my_data">DATA RETRIEVE my_data</option>
+            <option value="DATA STORE my_data "Some useful data"">DATA STORE my_data "Some useful data"</option>
+            <option value="DIAG">DIAG</option>
+            <option value="FLS">FLS</option>
+            <option value="GL GC">GL GC</option>
+            <option value="GL INFO">GL INFO</option>
+            <option value="HELP">HELP</option>
+            <option value="HELP PLAY">HELP PLAY</option>
+            <option value="INFO">INFO</option>
+            <option value="INFO 1">INFO 1</option>
+            <option value="INFO 1-1">INFO 1-1</option>
+            <option value="INFO 1-1 B">INFO 1-1 B</option>
+            <option value="INFO 1-1 F">INFO 1-1 F</option>
+            <option value="INFO 1 DELAY">INFO 1 DELAY</option>
+            <option value="INFO CONFIG">INFO CONFIG</option>
+            <option value="INFO PATHS">INFO PATHS</option>
+            <option value="INFO QUEUES">INFO QUEUES</option>
+            <option value="INFO SERVER">INFO SERVER</option>
+            <option value="INFO SYSTEM">INFO SYSTEM</option>
+            <option value="INFO THREADS">INFO THREADS</option>
+            <option value="KILL">KILL</option>
+            <option value="LOCK 1 ACQUIRE secret">LOCK 1 ACQUIRE secret</option>
+            <option value="LOCK 1 CLEAR">LOCK 1 CLEAR</option>
+            <option value="LOCK 1 RELEASE">LOCK 1 RELEASE</option>
+            <option value="LOG LEVEL debug">LOG LEVEL debug</option>
+            <option value="LOG LEVEL error">LOG LEVEL error</option>
+            <option value="LOG LEVEL fatal">LOG LEVEL fatal</option>
+            <option value="LOG LEVEL info">LOG LEVEL info</option>
+            <option value="LOG LEVEL trace">LOG LEVEL trace</option>
+            <option value="LOG LEVEL warning">LOG LEVEL warning</option>
+            <option value="MIXER 1-0 KEYER 1">MIXER 1-0 KEYER 1</option>
+            <option value="MIXER 1-1 CLEAR">MIXER 1-1 CLEAR</option>
+            <option value="MIXER 1 CLEAR">MIXER 1 CLEAR</option>
+            <option value="MIXER 1 STRAIGHT_ALPHA_OUTPUT 0">MIXER 1 STRAIGHT_ALPHA_OUTPUT 0</option>
+            <option value="MIXER 1 STRAIGHT_ALPHA_OUTPUT 1">MIXER 1 STRAIGHT_ALPHA_OUTPUT 1</option>
+            <option value="MIXER 5 GRID 2">MIXER 5 GRID 2</option>
+            <option value="NDI LIST">NDI LIST</option>
+            <option value="PLAY 1-1 "ndi://DEVICE-NAME/Source+Name"">PLAY 1-1 "ndi://DEVICE-NAME/Source+Name"</option>
+            <option value="PLAY 1-1 [NDI] "DEVICE-NAME (Source Name)"">PLAY 1-1 [NDI] "DEVICE-NAME (Source Name)"</option>
+            <option value="PLAY 1-1 AMB STING wipe_mask 0 wipe_overlay">PLAY 1-1 AMB STING wipe_mask 0 wipe_overlay</option>
+            <option value="PLAY 2-10 route://1-10 BACKGROUND">PLAY 2-10 route://1-10 BACKGROUND</option>
+            <option value="PLAY 2-10 route://1-10 NEXT">PLAY 2-10 route://1-10 NEXT</option>
+            <option value="PRINT 1">PRINT 1</option>
+            <option value="REMOVE 1 AUDIO">REMOVE 1 AUDIO</option>
+            <option value="REMOVE 1 BLUEFISH 1">REMOVE 1 BLUEFISH 1</option>
+            <option value="REMOVE 1 DECKLINK 1">REMOVE 1 DECKLINK 1</option>
+            <option value="REMOVE 1 EMBEDDED_AUDIO">REMOVE 1 EMBEDDED_AUDIO</option>
+            <option value="REMOVE 1 FILE">REMOVE 1 FILE</option>
+            <option value="remove 1 ndi">remove 1 ndi</option>
+            <option value="REMOVE 1 NDI">REMOVE 1 NDI</option>
+            <option value="REMOVE 1 newtek_ivga">REMOVE 1 newtek_ivga</option>
+            <option value="REMOVE 1 REPLAY">REMOVE 1 REPLAY</option>
+            <option value="REMOVE 1 SCREEN">REMOVE 1 SCREEN</option>
+            <option value="REMOVE 1 STREAM udp://localhost:5004">REMOVE 1 STREAM udp://localhost:5004</option>
+            <option value="remove 2 ndi">remove 2 ndi</option>
+            <option value="REMOVE 2 SCREEN">REMOVE 2 SCREEN</option>
+            <option value="remove 3 ndi">remove 3 ndi</option>
+            <option value="remove 4 ndi">remove 4 ndi</option>
+            <option value="RESTART">RESTART</option>
+            <option value="RESUME 1-1">RESUME 1-1</option>
+            <option value="SET 1 CHANNEL_LAYOUT 8ch">SET 1 CHANNEL_LAYOUT 8ch</option>
+            <option value="SET 1 MODE 1080i5000">SET 1 MODE 1080i5000</option>
+            <option value="SET 1 MODE 1080i5994">SET 1 MODE 1080i5994</option>
+            <option value="SET 1 MODE 1080i6000">SET 1 MODE 1080i6000</option>
+            <option value="SET 1 MODE 1080p2398">SET 1 MODE 1080p2398</option>
+            <option value="SET 1 MODE 1080p2400">SET 1 MODE 1080p2400</option>
+            <option value="SET 1 MODE 1080p2500">SET 1 MODE 1080p2500</option>
+            <option value="SET 1 MODE 1080p2997">SET 1 MODE 1080p2997</option>
+            <option value="SET 1 MODE 1080p3000">SET 1 MODE 1080p3000</option>
+            <option value="SET 1 MODE 1080p5000">SET 1 MODE 1080p5000</option>
+            <option value="SET 1 MODE 1080p5994">SET 1 MODE 1080p5994</option>
+            <option value="SET 1 MODE 1080p6000">SET 1 MODE 1080p6000</option>
+            <option value="SET 1 MODE 1556p2398">SET 1 MODE 1556p2398</option>
+            <option value="SET 1 MODE 1556p2400">SET 1 MODE 1556p2400</option>
+            <option value="SET 1 MODE 1556p2500">SET 1 MODE 1556p2500</option>
+            <option value="SET 1 MODE 2160p2398">SET 1 MODE 2160p2398</option>
+            <option value="SET 1 MODE 2160p2400">SET 1 MODE 2160p2400</option>
+            <option value="SET 1 MODE 2160p2500">SET 1 MODE 2160p2500</option>
+            <option value="SET 1 MODE 2160p2997">SET 1 MODE 2160p2997</option>
+            <option value="SET 1 MODE 2160p3000">SET 1 MODE 2160p3000</option>
+            <option value="SET 1 MODE 576p2500">SET 1 MODE 576p2500</option>
+            <option value="SET 1 MODE 720p2398">SET 1 MODE 720p2398</option>
+            <option value="SET 1 MODE 720p2400">SET 1 MODE 720p2400</option>
+            <option value="SET 1 MODE 720p2500">SET 1 MODE 720p2500</option>
+            <option value="SET 1 MODE 720p2997">SET 1 MODE 720p2997</option>
+            <option value="SET 1 MODE 720p3000">SET 1 MODE 720p3000</option>
+            <option value="SET 1 MODE 720p5000">SET 1 MODE 720p5000</option>
+            <option value="SET 1 MODE 720p5994">SET 1 MODE 720p5994</option>
+            <option value="SET 1 MODE 720p6000">SET 1 MODE 720p6000</option>
+            <option value="SET 1 MODE dci1080p2398">SET 1 MODE dci1080p2398</option>
+            <option value="SET 1 MODE dci1080p2400">SET 1 MODE dci1080p2400</option>
+            <option value="SET 1 MODE dci1080p2500">SET 1 MODE dci1080p2500</option>
+            <option value="SET 1 MODE dci2160p2398">SET 1 MODE dci2160p2398</option>
+            <option value="SET 1 MODE dci2160p2400">SET 1 MODE dci2160p2400</option>
+            <option value="SET 1 MODE dci2160p2500">SET 1 MODE dci2160p2500</option>
+            <option value="SET 1 MODE NTSC">SET 1 MODE NTSC</option>
+            <option value="SET 1 MODE PAL">SET 1 MODE PAL</option>
+            <option value="Swap 1-1 1-2">Swap 1-1 1-2</option>
+            <option value="THUMBNAIL GENERATE_ALL">THUMBNAIL GENERATE_ALL</option>
+            <option value="THUMBNAIL LIST">THUMBNAIL LIST</option>
+            <option value="TLS">TLS</option>
+            <option value="VERSION FLASH">VERSION FLASH</option>
+            <option value="VERSION SERVER">VERSION SERVER</option>
+            <option value="VERSION TEMPLATEH">VERSION TEMPLATEH</option>
+          </select>
+          <button onclick="sendstring($('#cmbamcp option:selected').text())" 
+          data-toggle="tooltip" data-placement="top"
+          title="Send Command">Send</button><br />
+          <br />
+
+    Response
+    <br />
+    <textarea id="ServerResponse" rows="10" cols="50"></textarea><br />
+
+</div>

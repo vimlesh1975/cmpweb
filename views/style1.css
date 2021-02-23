@@ -1,0 +1,59 @@
+html {
+  font-size: 12px;
+}
+
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }
+
+  .modules {
+    background-color: grey;
+    border: 2px solid red;
+  }
+
+  .casparcgwindow {
+    background-color: black;
+    border: 2px solid red;
+    
+      }
+
+    /* <!-- for multilavel drop down start --> */
+      .dropdown-submenu {
+        position: relative;
+      }
+  
+      .dropdown-submenu a::after {
+        transform: rotate(-90deg);
+        position: absolute;
+        right: 6px;
+        top: .8em;
+      }
+  
+      .dropdown-submenu .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-left: .1rem;
+        margin-right: .1rem;
+      }
+
+    /* <!-- for multilevel drop down end --> */
+
+    /* for selected row in playlist */
+    td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+
+    .selected {
+        background-color: brown;
+        color: #FFF;
+    }
+
+    /* for selected row in clipgrid */
+    .selected2 {
+      background-color: rgb(238, 23, 105);
+      color: #FFF;
+  }
+
+  .selected3 {
+    background-color: rgb(38, 23, 105);
+    color: #F0F;
+}
