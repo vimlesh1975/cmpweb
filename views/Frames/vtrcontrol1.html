@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+<style>
+    button {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <table border=5 style="border-radius:10px;">
+        <tr>
+            <td colspan="2" style="font-size: 23px;text-align: center;">RS 422 VTR Control</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size: 23px;text-align: center;">Time Code</td>
+        </tr>
+        <tr>
+            <td> Ports<select>
+                    <option selected=true>COM3</option>
+                    <option>COM2</option>
+                    <option>COM1</option>
+
+                </select></td>
+            <td> <button style="width: 50%;">Open</button><button style="width: 50%;">Close</button></td>
+        </tr>
+        <tr>
+            <td> <button>Play</button></td>
+            <td> <button>stop</button></td>
+        </tr>
+        <tr>
+            <td> <button>Rewind</button></td>
+            <td> <button>Fast FW</button></td>
+        </tr>
+        <tr>
+            <td style="text-align: center;" >00:02:00:00</td>
+            <td style="text-align: center;"> 00:02:20:00</td>
+        </tr>
+        <tr>
+            <td> <button>Go To IN</button></td>
+            <td> <button>Go To Out</button></td>
+        </tr>
+        <tr>
+            <td> <button>Mark IN</button></td>
+            <td> <button>Mark Out</button></td>
+        </tr>
+        <tr>
+            <td> <button>PreRoll</button></td>
+            <td> <button>Eject</button></td>
+        </tr>
+        <tr>
+            <td> <button>StandBy On</button></td>
+            <td> <button>StandBy Off</button></td>
+        </tr>
+        <tr>
+            <td> <button>Assembly On</button></td>
+            <td> <button>Assembly Off</button></td>
+        </tr>
+        <tr>
+            <td> <button>Record</button></td>
+            <td> <button>Auto Edit</button></td>
+        </tr>
+        <tr>
+            <td> <button>Preview</button></td>
+            <td> <button>Review</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>  JOG</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>   VAR F</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>   Shuttle </td> 
+        </tr>
+        <tr>
+            <td contenteditable> 00:02:00:00</td>
+            <td> <button>Cue</button></td>
+        </tr>
+        <tr>
+            <td> <button>1 Frame Back</button></td>
+            <td> <button>1 Frame Forward</button></td>
+        </tr>
+    </table>
+</body>
+
+</html>
