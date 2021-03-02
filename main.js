@@ -1,25 +1,3 @@
-//node media server code  starts
-const NodeMediaServer = require('node-media-server');
-
-const config = {
-	rtmp: {
-		port: 1935,
-		chunk_size: 60000,
-		gop_cache: true,
-		ping: 30,
-		ping_timeout: 60
-	},
-	http: {
-		port: 8001,
-		allow_origin: '*'
-	}
-};
-
-var nms = new NodeMediaServer(config)
-nms.run();
-//nms.stop();
-
-
 
 var response;
 
@@ -46,31 +24,9 @@ http.listen(port, (req, res) => {
 	console.log(`Server is liestemnig on ${port}`);
 })
 
-
-// OSC
-var oscClient = require('osc-min');
-var udpConnection = require("dgram");
-var oscdatafull = [];
-sock = udpConnection.
-
-	createSocket("udp4", function (msg, rinfo) {
-		var error, error1;
-		try {
-			oscMessages = oscClient.fromBuffer(msg);
-			oscMessages.elements.forEach(function (oscMessage) {
-				io.emit('oscmessage', oscMessage);
-			});
-
-		} catch (error1) {
-			error = error1;
-		}
-	});
-
-sock.bind(6250);
-
 const io = require("socket.io")(http);
-//global.io=io;
-
+global.io=io;
+global.app=app;
 io.on('connection', (socket) => {
 	console.log("Socket Server connected");
 	io.emit('casparstatus', { data1: connected.toString() });
@@ -184,59 +140,13 @@ app.post('/getfilesforanywhere', (req, res) => {
 	res.end;
 });
 
-var ffmpeg = require('fluent-ffmpeg');
-var proc;
 
-app.post('/transcode', (req, res) => {
-	var aa = req.body.cmd;
-	var filenamewithextension = aa.split('\\').pop().split('/').pop();
-	var filename = path.parse(filenamewithextension).name;
-
-	proc = ffmpeg(aa)
-
-		.on('end', function () {
-			io.emit('transcodestatus', { data1: 'file has been converted succesfully' });
-		})
-		.on('error', function (err) {
-			io.emit('transcodestatus', { data1: err.message });
-		})
-		.on('progress', (data) => {
-			io.emit('trancodepercent1', { percent1: (data.percent).toFixed(0) });
-		})
-		.on('start', (data) => {
-			io.emit('filenames', { originalfile1: aa, transcodedfilename1: 'd:/test/' + filename + '_transcoded.mxf' });
-		})
-		.on('stderr', function (stderrLine) {
-			io.emit('transcodestatus', { data1: stderrLine });
-		})
-
-		.outputOptions([
-			'-b:v 10M', '-r 60'
-		])
-		.save('d:/test/' + filename + '_transcoded.mxf');
-});
-
-var fluentffmpegutil = require('fluent-ffmpeg-util');
-app.post('/pauseffmpeg', (req, res) => {
-	fluentffmpegutil.pause(proc);
-});
-
-app.post('/resumeffmpeg', (req, res) => {
-	fluentffmpegutil.resume(proc);
-});
-
-app.post('/killffmpeg', (req, res) => {
-	proc.kill();
-
-});
+const nms1=require("./nms.js");
+var osc1=require("./osc.js");
+const ffmpeg1=require("./ffmpeg.js");
+const cpuuses1=require("./cpuuses.js");
+const vtrcontrol1=require("./vtrcontrol.js");
 
 
-// cpu uses code start
-var os = require('os-utils');
-setInterval(() => {
-	os.cpuUsage(function (v) {
-		io.emit('cpustatus', { data1:  (v * 100).toFixed(0) + '%'});
-	});
-}, 1000)
 
-// cpu uses code end
+

@@ -16,7 +16,7 @@
             <td colspan="2" style="font-size: 23px;text-align: center;">RS 422 VTR Control</td>
         </tr>
         <tr>
-            <td colspan="2" style="font-size: 23px;text-align: center;">Time Code</td>
+            <td id="vtrstatus" colspan="2" style="font-size: 23px;text-align: center;">Time Code</td>
         </tr>
         <tr>
             <td> Ports<select>
@@ -25,11 +25,11 @@
                     <option>COM1</option>
 
                 </select></td>
-            <td> <button style="width: 50%;">Open</button><button style="width: 50%;">Close</button></td>
+            <td> <button onclick= '$.post("vtrgettc")'  style="width: 50%;">Open</button><button style="width: 50%;">Close</button></td>
         </tr>
         <tr>
-            <td> <button>Play</button></td>
-            <td> <button>stop</button></td>
+            <td> <button onclick= '$.post("vtrplay")'>Play</button></td>
+            <td> <button onclick= '$.post("vtrstop")'>stop</button></td>
         </tr>
         <tr>
             <td> <button>Rewind</button></td>
@@ -86,5 +86,5 @@
         </tr>
     </table>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </html>

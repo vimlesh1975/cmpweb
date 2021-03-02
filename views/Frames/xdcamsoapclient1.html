@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style> 
+        td { 
+           white-space: nowrap; 
+        } 
+        html{
+            font-size: 12px;
+        }
+     </style> 
+    <title>Page Title</title>
+</head>
+
+<body>
+
+    <table border=1>
+        <tr>
+            <td colspan="14" style="text-align: center;background-color: yellow;">Time Code </td>
+        </tr>
+        <tr>
+            <td colspan="13"><input type="range" min="1" max="100%" value="50" style="width: 100%;" /></td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td><button>IN</button></td>
+            <td>100</td>
+            <td> <button>cue</button></td>
+            <td> <button>1 Frame Back</button></td>
+            <td><button>Play</button></td>
+            <td> <button>1 Frame Forward</button></td>
+            <td><button>Pause</button></td>
+            <td><button>Resume</button></td>
+            <td><button>Stop</button></td>
+            <td> <button>Cue Next</button></td>
+            <td><button>Play Next</button></td>
+            <td> <button>Go To End</button></td>
+            <td>300</td>
+            <td align="right">  <button>Out</button></td>
+        </tr>
+        <tr>
+            <td><button>Go To IN</button></td>
+ 
+            <td colspan="2"> <button>Play From IN</button></td>
+            <td colspan="1"> <button>Go To TC</button></td>
+            <td>00:02:00:00</td>
+            <td colspan="2"> <button>Forward Second</button></td>
+            <td>5</td>
+            <td colspan="2"> <button>Play Last 5 Sec</button></td>
+            <td colspan="2"> <button>Play From Out</button></td>
+
+            
+          
+            <td colspan="2" align="right"> <button>Go To Out</button></td>
+        </tr>
+        <tr>
+            <td colspan="2"> <button>Save Sub Clip</button></td>
+            <td colspan="2">Original Duration</td>
+            <td >00:02:00:00</td>
+            <td>00:02:00:00</td>
+            <td>Trimmed Duration</td>
+            <td></td>
+          
+          
+      
+            <td colspan="2"> <button>Fast Rewind</button></td>
+            <td colspan="2"> <button>Fast Forward</button></td>
+            <td> <button>Speed 1</button></td>
+            <td><input type="number" id="quantity" name="quantity" min="-2.0" max="2.0" value="1.0" step="0.1"></td>
+        </tr>
+        <tr>
+            <td colspan="14"> Triiming </td>
+        </tr>
+        <tr>
+            <td colspan="3"> <button>Make New File</button></td>
+            <td>New Name</td>
+            <td>Test500</td>
+            <td>Destination Drive</td>
+            <td colspan="2">
+                <select>
+                    <option selected="true">InternalDrive</option>
+                    <option>SxS_A</option>
+                    <option>SxS_B</option>
+                    <option>PD_ProAV</option>
+                    <option>PD_BPAV</option>
+                    <option>PD_XDROOT</option>
+                    <option>USBDrive</option>
+
+                </select>
+           </td>
+          
+           
+            <td></td>
+         
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+    </table>
+
+    <br />
+
+</body>
+
+</html>

@@ -1,10 +1,17 @@
-<div  id="GeneralRecorder" class="collapse" data-parent="#myGroup">
+<div id="GeneralRecorder" class="collapse" data-parent="#myGroup">
   <h3> General Recorder </h3>
-  <iframe id="GeneralRecorder1"  style="position:fixed;left :10px;top:120px;height: 360px;width: 620px;" src="GeneralRecorder.html"></iframe>
 
-  <iframe  id="vtrcontrol1"  style="position:fixed;left :700px;top:120px;height: 575px;width: 270px;" src="frames/vtrcontrol1.html"></iframe>
+  <iframe id="GeneralRecorder1" style="position:fixed;left :10px;top:120px;height: 360px;width: 620px;"
+    src="GeneralRecorder.html"></iframe>
+  <iframe id="vtrcontrol1" style="position:fixed;left :700px;top:120px;height: 575px;width: 270px;"
+    src="frames/vtrcontrol1.html"></iframe>
 </div>
-
+<script src="/socket.io/socket.io.js"></script>
 <script>
-
+ 
+  // var socket = io();
+  // socket.on('vtrstatus', function (data) {
+  //   $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
+  //   //alert("vimlesh");
+  // })
 </script>
