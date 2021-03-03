@@ -122,7 +122,7 @@ function flvplayerstart() {
         flvPlayer.play();
     }
 }
-flvplayerstart();
+//flvplayerstart();
 function sendstring(str) {
     $.post("endpoint", {
         cmd: str
@@ -574,3 +574,4 @@ socket.on('cpustatus', function (data) {
 socket.on('vtrstatus', function (data) {
     $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
 })
+

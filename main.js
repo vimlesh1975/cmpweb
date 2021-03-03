@@ -37,7 +37,7 @@ var connected = false;
 
 var net = require('net');
 var client = net.Socket();
-async function connecttocasparcg(host1, port1) {
+async function connecttocasparcg(host1, port1,res) {
 
 	if (connected == false) {
 		console.log("Connection Request from client");
@@ -53,10 +53,9 @@ async function connecttocasparcg(host1, port1) {
 		connected = false;
 	}
 	io.emit('casparstatus', { data1: connected.toString() });
+	res.end();
 }
-function connectListener() {
 
-}
 
 client.on('error', function (err) {
 	console.log(err)
@@ -116,8 +115,8 @@ app.post('/endpoint', (req, res) => {
 });
 
 app.post('/connect', (req, res) => {
-	connecttocasparcg(req.body.host, req.body.port);
-	res.end();
+	connecttocasparcg(req.body.host, req.body.port,res);
+	//res.end();
 });
 
 
@@ -136,8 +135,8 @@ app.post('/getfilesforanywhere', (req, res) => {
 		product.push([item.path])
 
 	})
-	res.send(product);
-	res.end;
+	//res.send(product);
+	res.end(product);
 });
 
 
@@ -146,6 +145,7 @@ var osc1=require("./osc.js");
 const ffmpeg1=require("./ffmpeg.js");
 const cpuuses1=require("./cpuuses.js");
 const vtrcontrol1=require("./vtrcontrol.js");
+const mysql1=require("./sql.js");
 
 
 

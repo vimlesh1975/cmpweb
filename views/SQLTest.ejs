@@ -2,5 +2,54 @@
     <h3>SQLTest</h3>
     <div style="overflow:scroll;height: 800px;">
 
+        <table border=1 style="background-color: bisque;">
+            <tr>
+                <th colspan="2">Mysql Setting</th>
+                <td rowspan="6"><button onClick="$.post('setserver')">Set Server</button> </td>
+            </tr>
+            <tr>
+                <th>Server</th>
+                <td contenteditable>localhost</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td contenteditable>root</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td contenteditable>root</td>
+            </tr>
+            <tr>
+                <th>Database</th>
+                <td contenteditable>cmp</td>
+            </tr>
+            <tr>
+                <th>Port</th>
+                <td contenteditable>3306</td>
+            </tr>
+            <tr>
+                <th><button onclick='gettablenames()'>Get tables</button></th>
+                <td colspan="2" contenteditable>
+                    <select id="sqltablesnames">
+                        <option>Test1</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
+
+<script>
+    function gettablenames() {
+        $.post("gettablenames", {
+            cmd: 'version server'
+        },
+            function (data, status) {
+                $('#sqltablesnames').html('');
+                data.forEach(element => {
+                    $('#sqltablesnames').append(new Option(element, element));
+                });
+            });
+    }
+  
+</script>
