@@ -16,7 +16,10 @@
             <td colspan="2" style="font-size: 23px;text-align: center;">RS 422 VTR Control</td>
         </tr>
         <tr>
-            <td id="vtrstatus" colspan="2" style="font-size: 23px;text-align: center;">Time Code</td>
+            <td id="vtrstatus" colspan="2" style="font-size: 23px;text-align: center;">VTR Status</td>
+        </tr>
+        <tr>
+            <td id="tc" colspan="2" style="font-size: 23px;text-align: center;">00:02:00:00</td>
         </tr>
         <tr>
             <td> Ports<select>
@@ -25,18 +28,20 @@
                     <option>COM1</option>
 
                 </select></td>
-            <td> <button onclick= '$.post("vtrgettc")'  style="width: 50%;">Open</button><button style="width: 50%;">Close</button></td>
+            <td> <button onclick='$.post("vtrgettc")' style="width: 50%;">Open</button><button onclick='$.post("portclose")'  style="width: 50%;">Close</button>
+               
+            </td>
         </tr>
         <tr>
-            <td> <button onclick= '$.post("vtrplay")'>Play</button></td>
-            <td> <button onclick= '$.post("vtrstop")'>stop</button></td>
+            <td> <button onclick='$.post("vtrplay")'>Play</button></td>
+            <td> <button onclick='$.post("vtrstop")'>stop</button></td>
         </tr>
         <tr>
-            <td> <button>Rewind</button></td>
-            <td> <button>Fast FW</button></td>
+            <td> <button onclick='$.post("Rewind")'>Rewind</button></td>
+            <td> <button onclick='$.post("FastFW")'>Fast FW</button></td>
         </tr>
         <tr>
-            <td style="text-align: center;" >00:02:00:00</td>
+            <td style="text-align: center;">00:02:00:00</td>
             <td style="text-align: center;"> 00:02:20:00</td>
         </tr>
         <tr>
@@ -44,47 +49,75 @@
             <td> <button>Go To Out</button></td>
         </tr>
         <tr>
-            <td> <button>Mark IN</button></td>
-            <td> <button>Mark Out</button></td>
+            <td> <button onclick='$.post("MarkIN")'>Mark IN</button></td>
+            <td> <button onclick='$.post("MarkOut")'>Mark Out</button></td>
         </tr>
         <tr>
-            <td> <button>PreRoll</button></td>
-            <td> <button>Eject</button></td>
+            <td> <button onclick='$.post("PreRoll")'>PreRoll</button></td>
+            <td> <button onclick='$.post("Eject")'>Eject</button></td>
         </tr>
         <tr>
-            <td> <button>StandBy On</button></td>
-            <td> <button>StandBy Off</button></td>
+            <td> <button onclick='$.post("StandByOn")'>StandBy On</button></td>
+            <td> <button onclick='$.post("StandByOff")'>StandBy Off</button></td>
         </tr>
         <tr>
-            <td> <button>Assembly On</button></td>
-            <td> <button>Assembly Off</button></td>
+            <td> <button onclick='$.post("AssembleOn")'>Assemble On</button></td>
+            <td> <button onclick='$.post("AssembleOff")'>Assemble Off</button></td>
         </tr>
         <tr>
-            <td> <button>Record</button></td>
-            <td> <button>Auto Edit</button></td>
+            <td> <button onclick='$.post("Record")'>Record</button></td>
+            <td> <button onclick='$.post("AutoEdit")'>Auto Edit</button></td>
         </tr>
         <tr>
-            <td> <button>Preview</button></td>
-            <td> <button>Review</button></td>
+            <td> <button onclick='$.post("Preview")'>Preview</button></td>
+            <td> <button onclick='$.post("Review")'>Review</button></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>  JOG</td>
+            <td colspan="2"><input id="jog1" type="range" min="-118" max="118" value="0" </input> JOG</td>
         </tr>
         <tr>
-            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>   VAR F</td>
+            <td colspan="2"><input id="varf1" type="range" min="-118" max="118" value="0" </input> VAR F</td>
         </tr>
         <tr>
-            <td colspan="2"><input type="range" min="1" max="100" value="50" </input>   Shuttle </td> 
+            <td colspan="2"><input id="shuttle1" type="range" min="-118" max="118" value="0" </input> Shuttle </td>
         </tr>
         <tr>
-            <td contenteditable> 00:02:00:00</td>
-            <td> <button>Cue</button></td>
+            <td id="cuepoint1" contenteditable> 00:02:00:00</td>
+            <td> <button onclick='$.post("cue",{cmd:$("#cuepoint1").text()})' >Cue</button></td>
         </tr>
         <tr>
-            <td> <button>1 Frame Back</button></td>
-            <td> <button>1 Frame Forward</button></td>
+            <td> <button onclick='$.post("oneframeback",{cmd:$("#tc").text()})' id="oneframeback" >1 Frame Back</button></td>
+            <td> <button onclick='$.post("oneframeforward",{cmd:$("#tc").text()})' id="oneframeforward">1 Frame Forward</button></td>
         </tr>
     </table>
 </body>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#jog1").on("mouseleave", (function () {
+            $(this).val(0);
+        }));
+        $("#varf1").on("mouseleave", (function () {
+            $(this).val(0);
+        }));
+        $("#shuttle1").on("mouseleave", (function () {
+            $(this).val(0);
+        }));
+
+        $("#jog1").on("change", (function () {
+            $.post("jog", { cmd: $(this).val() });
+        }));
+
+        $("#varf1").on("change", (function () {
+            $.post("varf", { cmd: $(this).val() });
+        }));
+        $("#shuttle1").on("change", (function () {
+            $.post("shuttle", { cmd: $(this).val() });
+        }));
+
+    });
+</script>
+
 </html>
