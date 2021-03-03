@@ -1,0 +1,1 @@
+This is a client for casparcg web version of CaspaMediaPlayback.
