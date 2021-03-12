@@ -193,25 +193,47 @@ app.post('/frames/shuttle', (req, res) => {
 app.post('/frames/portclose', (req, res) => {
   myPort.close();
   io.emit('vtrstatus', { data1: "Port Closed" });
-});
+})
 
 app.post('/frames/cue', (req, res) => {
   var aa = (req.body.cmd).split(":");
-  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3], 16)) + String.fromCharCode((parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3], 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16))));
+  aa[0]=parseInt(aa[0]);
+  aa[1]=parseInt(aa[1]);
+  aa[2]=parseInt(aa[2]);
+  aa[3]=parseInt(aa[3]);
+
+  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3], 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3], 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
   io.emit('vtrstatus', { data1: "cue at " + req.body.cmd });
+  res.end();
+});
+
+
+
+app.post('/frames/oneframeback', (req, res) => {
+ var aa = (req.body.cmd).split(":");
+  aa[0]=parseInt(aa[0]);
+  aa[1]=parseInt(aa[1]);
+  aa[2]=parseInt(aa[2]);
+  aa[3]=parseInt(aa[3]);
+  
+  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3]-1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3]-1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
+  io.emit('vtrstatus', { data1: "-1 " + req.body.cmd });
   res.end();
 });
 
 app.post('/frames/oneframeforward', (req, res) => {
   var aa = (req.body.cmd).split(":");
-  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3], 16) + 1) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3] + 1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
-  io.emit('vtrstatus', { data1: "1rame +  " + req.body.cmd });
-});
-
-app.post('/frames/oneframeback', (req, res) => {
-  var aa = (req.body.cmd).split(":");
-  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3], 16) - 1) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3] - 1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
-  io.emit('vtrstatus', { data1: "1frame -  " + req.body.cmd });
+  aa[0]=parseInt(aa[0]);
+  aa[1]=parseInt(aa[1]);
+  aa[2]=parseInt(aa[2]);
+  aa[3]=parseInt(aa[3]);
+  
+  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3]+1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3]+1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
+  io.emit('vtrstatus', { data1: "+1 " + req.body.cmd });
   res.end();
 });
 
+// setInterval(() => { 
+//   myPort.write("1212121"+"\r\n"); 
+//   console.log("ll");
+// }, 1000);

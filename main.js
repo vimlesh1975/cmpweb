@@ -146,6 +146,7 @@ const ffmpeg1=require("./ffmpeg.js");
 const cpuuses1=require("./cpuuses.js");
 const vtrcontrol1=require("./vtrcontrol.js");
 const mysql1=require("./sql.js");
+const xdcamcontrol1=require("./xdcamcontrol.js");
 
 
 

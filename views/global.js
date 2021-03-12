@@ -575,3 +575,13 @@ socket.on('vtrstatus', function (data) {
     $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
 })
 
+socket.on('xdcamstatus', function (data) {
+    $("#xdcamsoapclient1").contents().find("body").find("#xdcamstatus").html(data.data1);
+})
+socket.on('xdcamtc', function (data) {
+    $("#xdcamsoapclient1").contents().find("body").find("#xdcamtc").html(data.data1);
+})
+socket.on('xdcamplayerotherstatus', function (data) {
+    $("#xdcamsoapclient1").contents().find("body").find("#xdcamplayerotherstatus").text(data.data1);
+})
+

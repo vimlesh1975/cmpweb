@@ -2,22 +2,40 @@
 <html>
 
 <head>
-    <style> 
-        td { 
-           white-space: nowrap; 
-        } 
-        html{
+    <style>
+        td {
+            white-space: nowrap;
+        }
+
+        html {
             font-size: 12px;
         }
-     </style> 
+    </style>
     <title>Page Title</title>
 </head>
 
 <body>
-
     <table border=1>
         <tr>
-            <td colspan="14" style="text-align: center;background-color: yellow;">Time Code </td>
+            <td>Xdcam Address:</td>
+            <td id="xdcamip1" contenteditable>192.168.5.10/webservice</td>
+            <td rowspan="3"><button onclick='xdcamset()'>Set XdCam</button></td>
+        </tr>
+        <tr>
+            <td> Username:</td>
+            <td id="xdacmuser1" contenteditable>admin</td>
+        </tr>
+        <tr>
+            <td> Username:</td>
+            <td id="xdcampassword1" contenteditable>pdw-hd1550</td>
+        </tr>
+    </table>
+    <table border=1>
+        <tr>
+            <td id="xdcamstatus" colspan="14" style="text-align: center">Status </td>
+        </tr>
+        <tr>
+            <td id="xdcamtc" colspan="14" style="text-align: center;background-color: yellow;">Time Code </td>
         </tr>
         <tr>
             <td colspan="13"><input type="range" min="1" max="100%" value="50" style="width: 100%;" /></td>
@@ -30,18 +48,18 @@
             <td> <button>1 Frame Back</button></td>
             <td><button>Play</button></td>
             <td> <button>1 Frame Forward</button></td>
-            <td><button>Pause</button></td>
-            <td><button>Resume</button></td>
+            <td><button onclick='$.post("xdcampause")'>Pause</button></td>
+            <td><button onclick='$.post("xdcamresume")'>Resume</button></td>
             <td><button>Stop</button></td>
             <td> <button>Cue Next</button></td>
             <td><button>Play Next</button></td>
             <td> <button>Go To End</button></td>
             <td>300</td>
-            <td align="right">  <button>Out</button></td>
+            <td align="right"> <button>Out</button></td>
         </tr>
         <tr>
             <td><button>Go To IN</button></td>
- 
+
             <td colspan="2"> <button>Play From IN</button></td>
             <td colspan="1"> <button>Go To TC</button></td>
             <td>00:02:00:00</td>
@@ -50,22 +68,22 @@
             <td colspan="2"> <button>Play Last 5 Sec</button></td>
             <td colspan="2"> <button>Play From Out</button></td>
 
-            
-          
+
+
             <td colspan="2" align="right"> <button>Go To Out</button></td>
         </tr>
         <tr>
             <td colspan="2"> <button>Save Sub Clip</button></td>
             <td colspan="2">Original Duration</td>
-            <td >00:02:00:00</td>
+            <td>00:02:00:00</td>
             <td>00:02:00:00</td>
             <td>Trimmed Duration</td>
             <td></td>
-          
-          
-      
-            <td colspan="2"> <button>Fast Rewind</button></td>
-            <td colspan="2"> <button>Fast Forward</button></td>
+            
+            
+
+            <td colspan="2"> <button onclick='$.post("FastRewind")'>Fast Rewind</button></td>
+            <td colspan="2"> <button onclick='$.post("FastForward")' >Fast Forward</button></td>
             <td> <button>Speed 1</button></td>
             <td><input type="number" id="quantity" name="quantity" min="-2.0" max="2.0" value="1.0" step="0.1"></td>
         </tr>
@@ -88,11 +106,11 @@
                     <option>USBDrive</option>
 
                 </select>
-           </td>
-          
-           
+            </td>
+
+
             <td></td>
-         
+
             <td></td>
             <td></td>
             <td></td>
@@ -101,9 +119,21 @@
         </tr>
 
     </table>
-
-    <br />
-
+<br />
+<div id="xdcamplayerotherstatus" style="width: 500px;overflow: scroll;" >test</div>
+   
+    <script>
+        function xdcamset() {
+            //alert("http://" + $('#xdacmuser1').text()+":" + $('#xdcampassword1').text()+"@" + $('#xdcamip1').text());
+            $.post("xdcamset", {
+              cmd:"http://" + $('#xdacmuser1').text()+":" + $('#xdcampassword1').text()+"@" + $('#xdcamip1').text()
+               
+            },
+                function (data, status) {
+                });
+        }
+    </script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 
 </html>
