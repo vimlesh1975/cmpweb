@@ -138,7 +138,7 @@ app.post('/getfilesforanywhere', (req, res) => {
 	//res.send(product);
 	res.end(product);
 });
-
+//app.get('/favicon.ico', (req, res) => res.status(204));
 
 const nms1=require("./nms.js");
 var osc1=require("./osc.js");
