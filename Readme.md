@@ -7,4 +7,4 @@ Open this folder in vscode editor
 open terminal
 give command as node main.js
 
-open in chrpme browser http://localhost:8080
+open in chrome browser http://localhost:8080
