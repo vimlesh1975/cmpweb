@@ -12,8 +12,9 @@
 
 
 <div id="recorder1">
-  <table border=1 style="border-collapse: collapse;left:10px;top:30px">
-    General Recording File
+  General Recording File
+
+  <table border="1px" style="border-collapse: collapse;left: 10px;top: 30px;">
     <tr>
       <td>Decklink </td>
       <td><select id="decklinknumber">
@@ -343,7 +344,8 @@
   }
 
   function startpreview() {
-    stoppreview();
+    flvplayerstart()
+    //stoppreview();
     if (parent.ServerVersion == 2.3) {
       setTimeout(parent.sendstring('add ' + recordingchannelnumner + ' stream rtmp://localhost/live/' + recordingchannelnumner + ' -codec:v libx264 -codec:a aac -strict -2  -b:a 128k -x264opts:v keyint=45 -ar:a 48000 -tune:v zerolatency -preset:v ultrafast -b:v 1500k -minrate:v 1500k -maxrate:v 1500k -bufsize:v 1500k -filter:v format=pix_fmts=yuv420p,scale=400:300 -filter:a pan=stereo|c0=c0|c1=c1 -format flv'), 200);
     }

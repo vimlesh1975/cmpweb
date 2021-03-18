@@ -122,7 +122,7 @@ function flvplayerstart() {
         flvPlayer.play();
     }
 }
-//flvplayerstart();
+flvplayerstart();
 function sendstring(str) {
     $.post("endpoint", {
         cmd: str
@@ -360,17 +360,6 @@ socket.on('oscmessage', function (msg) {
 
     currentframe = (currenttime * fps).toFixed(0);
     totalframe = (totlatime * fps).toFixed(0);
-
-    // if (ServerVersion==2.3){
-    //     document.getElementById('/channel/1/stage/layer/1/foreground/file/frame').cells[1].innerHTML = currentframe;
-    //     document.getElementById('/channel/1/stage/layer/1/foreground/file/frame').cells[2].innerHTML = totalframe;
-    // }
-    // else{
-    //     document.getElementById('/channel/1/stage/layer/1/file/frame').cells[1].innerHTML = currentframe;
-    //     document.getElementById('/channel/1/stage/layer/1/file/frame').cells[2].innerHTML = totalframe;
-    // }
-
-
 
     document.getElementById("input2").max = totalframe;
 
