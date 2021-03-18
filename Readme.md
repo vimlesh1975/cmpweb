@@ -5,6 +5,9 @@ Download this by download zip=>
  go to cmpweb folder=>
 Open this folder in vscode editor
 open terminal
-give command as node main.js
+give command as 
+npm i
+and then
+node main.js
 
 open in chrome browser http://localhost:8080
