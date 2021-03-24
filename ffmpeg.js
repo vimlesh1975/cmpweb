@@ -1,14 +1,14 @@
 const path = require('path');
 
 var ffmpeg = require('fluent-ffmpeg');
-var proc;
+var procffmpeg;
 
 app.post('/transcode', (req, res) => {
 	var aa = req.body.cmd;
 	var filenamewithextension = aa.split('\\').pop().split('/').pop();
 	var filename = path.parse(filenamewithextension).name;
 
-	proc = ffmpeg(aa)
+	procffmpeg = ffmpeg(aa)
 
 		.on('end', function () {
 			io.emit('transcodestatus', { data1: 'file has been converted succesfully' });
@@ -30,18 +30,22 @@ app.post('/transcode', (req, res) => {
 			'-b:v 10M', '-r 60'
 		])
 		.save('d:/test/' + filename + '_transcoded.mxf');
+		res.end();
 });
 
 var fluentffmpegutil = require('fluent-ffmpeg-util');
 app.post('/pauseffmpeg', (req, res) => {
-	fluentffmpegutil.pause(proc);
+	fluentffmpegutil.pause(procffmpeg);
+	res.end();
 });
 
 app.post('/resumeffmpeg', (req, res) => {
-	fluentffmpegutil.resume(proc);
+	fluentffmpegutil.resume(procffmpeg);
+	res.end();
 });
 
 app.post('/killffmpeg', (req, res) => {
-	proc.kill();
+	procffmpeg.kill();
+	res.end();
 
 });

@@ -9,7 +9,16 @@ const app = express();
 const routes = require("./routes/index.js")
 app.use("/", routes);
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
-app.set('views', './views')
+app.set('views', './views');
+
+app.use(express.static('views'));
+
+function middleware(req, res,next){
+	console.log(req.url);
+	next();
+}
+app.use(middleware);
+
 app.set("view engine", "ejs");
 //var serveStatic = require( "serve-static" );
 //app.use('/media', serveStatic('z:\\'));
@@ -19,7 +28,7 @@ app.set("view engine", "ejs");
 
 
 const port = 8080;
-const http = require("http").Server(app)
+const http = require("http").Server(app);
 http.listen(port, (req, res) => {
 	console.log(`Server is liestemnig on ${port}`);
 })
@@ -58,7 +67,7 @@ async function connecttocasparcg(host1, port1,res) {
 
 
 client.on('error', function (err) {
-	console.log(err)
+	console.log(err);
 	connected = false;
 	io.emit('casparstatus', { data1: connected.toString() });
 })
@@ -98,8 +107,7 @@ process.on('uncaughtException', function (err) {
 	io.emit('casparstatus', { data1: connected.toString() });
 });
 
-app.use(express.static('views'));
-app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
+
 
 app.post('/endpoint', (req, res) => {
 	if (connected == true) {
@@ -136,9 +144,9 @@ app.post('/getfilesforanywhere', (req, res) => {
 
 	})
 	//res.send(product);
-	res.end(product);
+	res.send(product);
 });
-//app.get('/favicon.ico', (req, res) => res.status(204));
+
 
 const nms1=require("./nms.js");
 var osc1=require("./osc.js");
@@ -147,7 +155,3 @@ const cpuuses1=require("./cpuuses.js");
 const vtrcontrol1=require("./vtrcontrol.js");
 const mysql1=require("./sql.js");
 const xdcamcontrol1=require("./xdcamcontrol.js");
-
-
-
-

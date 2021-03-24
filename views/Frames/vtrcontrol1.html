@@ -22,13 +22,13 @@
             <td id="tc" colspan="2" style="font-size: 23px;text-align: center;">00:02:00:00</td>
         </tr>
         <tr>
-            <td> Ports<select>
-                    <option selected=true>COM3</option>
+            <td id="cmbports">Ports<select>
+                    <option selected=true>COM1</option>
                     <option>COM2</option>
-                    <option>COM1</option>
+                    <option>COM3</option>
 
                 </select></td>
-            <td> <button onclick='$.post("vtrgettc")' style="width: 50%;">Open</button><button onclick='$.post("portclose")'  style="width: 50%;">Close</button>
+            <td> <button onclick='$.post("portopen",{portname: $(`#cmbports option:selected`).text()})' style="width: 50%;">Open</button><button onclick='$.post("portclose")'  style="width: 50%;">Close</button>
                
             </td>
         </tr>

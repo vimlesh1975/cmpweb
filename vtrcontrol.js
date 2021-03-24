@@ -1,26 +1,42 @@
 const SerialPort = require('serialport');
 // Promise approach
-SerialPort.list().then(ports => {
-  ports.forEach(function (port) {
-    console.log(port.path);
-    // console.log(port.pnpId);
-    // console.log(port.manufacturer);
-  });
-});
-var portName = 'COM2';
-var myPort = new SerialPort(portName, 38400);
-let Readline = SerialPort.parsers.Readline; // make instance of Readline parser
-let parser = new Readline; // make a new parser to read ASCII lines
-myPort.pipe(parser); // pipe the serial stream to the parser
+var portName;
+var myPort;
+function portopen(_portName) {
+  SerialPort.list().then(ports => {
+    portName =_portName;// ports[0].path;// 'COM2';
 
-myPort.on('open', showPortOpen);
-//myPort.on('data', readSerialData);
-parser.on('data', readSerialData);
-myPort.on('close', showPortClose);
-myPort.on('error', showError);
+    ports.forEach(function (port) {
+      console.log(port.path);
+    });
+    myPort = new SerialPort(portName, 38400);
+    let Readline = SerialPort.parsers.Readline; // make instance of Readline parser
+    let parser = new Readline; // make a new parser to read ASCII lines
+    myPort.pipe(parser); // pipe the serial stream to the parser
+
+    myPort.on('open', showPortOpen);
+    //myPort.on('data', readSerialData);
+    parser.on('data', readSerialData);
+    myPort.on('close', showPortClose);
+    myPort.on('error', showError);
+  });
+}
+
+//portopen("COM1");
+
+// setTimeout(() => {
+//   portclose()
+// }, 3000);
+
+function portclose(){
+  myPort.close();
+}
+
+
 
 function showPortOpen() {
-  console.log('port open');
+  console.log(portName +' port open');
+  io.emit('vtrstatus', { data1: "port open " });
 }
 
 function readSerialData(data) {
@@ -30,10 +46,12 @@ function readSerialData(data) {
 
 function showPortClose() {
   console.log('port closed.');
+  io.emit('vtrstatus', { data1: "port closed " });
 }
 
 function showError(error) {
   console.log('Serial port error: ' + error);
+  io.emit('vtrstatus', { data1: error.toString()});
 }
 
 var gettc = String.fromCharCode(97) + String.fromCharCode(12) + String.fromCharCode(1) + String.fromCharCode(110);
@@ -41,6 +59,19 @@ var gettc = String.fromCharCode(97) + String.fromCharCode(12) + String.fromCharC
 function vtrcommand(a, b, c) {
   return (String.fromCharCode(a) + String.fromCharCode(b) + String.fromCharCode(c));
 }
+app.post('/frames/portopen', (req, res) => {
+  portopen(req.body.portname);
+  
+  res.end();
+});
+
+
+app.post('/frames/portclose', (req, res) => {
+  myPort.close();
+  
+  res.end();
+});
+
 app.post('/frames/vtrgettc', (req, res) => {
   myPort.write(gettc);// for gttting tc
   //console.log(gettc);
@@ -197,10 +228,10 @@ app.post('/frames/portclose', (req, res) => {
 
 app.post('/frames/cue', (req, res) => {
   var aa = (req.body.cmd).split(":");
-  aa[0]=parseInt(aa[0]);
-  aa[1]=parseInt(aa[1]);
-  aa[2]=parseInt(aa[2]);
-  aa[3]=parseInt(aa[3]);
+  aa[0] = parseInt(aa[0]);
+  aa[1] = parseInt(aa[1]);
+  aa[2] = parseInt(aa[2]);
+  aa[3] = parseInt(aa[3]);
 
   myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3], 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3], 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
   io.emit('vtrstatus', { data1: "cue at " + req.body.cmd });
@@ -210,25 +241,25 @@ app.post('/frames/cue', (req, res) => {
 
 
 app.post('/frames/oneframeback', (req, res) => {
- var aa = (req.body.cmd).split(":");
-  aa[0]=parseInt(aa[0]);
-  aa[1]=parseInt(aa[1]);
-  aa[2]=parseInt(aa[2]);
-  aa[3]=parseInt(aa[3]);
-  
-  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3]-1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3]-1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
+  var aa = (req.body.cmd).split(":");
+  aa[0] = parseInt(aa[0]);
+  aa[1] = parseInt(aa[1]);
+  aa[2] = parseInt(aa[2]);
+  aa[3] = parseInt(aa[3]);
+
+  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3] - 1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3] - 1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
   io.emit('vtrstatus', { data1: "-1 " + req.body.cmd });
   res.end();
 });
 
 app.post('/frames/oneframeforward', (req, res) => {
   var aa = (req.body.cmd).split(":");
-  aa[0]=parseInt(aa[0]);
-  aa[1]=parseInt(aa[1]);
-  aa[2]=parseInt(aa[2]);
-  aa[3]=parseInt(aa[3]);
-  
-  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3]+1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3]+1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
+  aa[0] = parseInt(aa[0]);
+  aa[1] = parseInt(aa[1]);
+  aa[2] = parseInt(aa[2]);
+  aa[3] = parseInt(aa[3]);
+
+  myPort.write(String.fromCharCode(36) + String.fromCharCode(49) + String.fromCharCode(parseInt(aa[3] + 1, 16)) + String.fromCharCode(parseInt(aa[2], 16)) + String.fromCharCode(parseInt(aa[1], 16)) + String.fromCharCode(parseInt(aa[0], 16)) + String.fromCharCode(36 + 49 + parseInt(aa[3] + 1, 16) + parseInt(aa[2], 16) + parseInt(aa[1], 16) + parseInt(aa[0], 16)));
   io.emit('vtrstatus', { data1: "+1 " + req.body.cmd });
   res.end();
 });

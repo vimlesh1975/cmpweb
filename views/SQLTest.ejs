@@ -5,27 +5,29 @@
         <table border=1 style="background-color: bisque;">
             <tr>
                 <th colspan="2">Mysql Setting</th>
-                <td rowspan="6"><button onClick="$.post('setserver')">Set Server</button> </td>
+                <td rowspan="6"><button
+                        onClick="$.post('setserver', {'host':$('#mysqlhost').html(), 'username':$('#mysqlusername').html(), 'password':$('#mysqlpassword').html(), 'port':$('#mysqlport').html()})">Set
+                        Server</button> </td>
             </tr>
             <tr>
                 <th>Server</th>
-                <td contenteditable>localhost</td>
+                <td id="mysqlhost" contenteditable>localhost</td>
             </tr>
             <tr>
                 <th>User</th>
-                <td contenteditable>root</td>
+                <td id="mysqlusername" contenteditable>root</td>
             </tr>
             <tr>
                 <th>Password</th>
-                <td contenteditable>root</td>
+                <td id="mysqlpassword" contenteditable>root</td>
             </tr>
             <tr>
                 <th>Database</th>
-                <td contenteditable>cmp</td>
+                <td id="mysqdatabasename" contenteditable>cmp</td>
             </tr>
             <tr>
                 <th>Port</th>
-                <td contenteditable>3306</td>
+                <td id="mysqport" contenteditable>3306</td>
             </tr>
             <tr>
                 <th><button onclick='gettablenames()'>Get tables</button></th>
@@ -36,13 +38,72 @@
                 </td>
             </tr>
         </table>
+        <br />
+        <button onclick='gettabledata()'>Get table data</button>
+        <div id="divmysqldata" style="overflow: scroll;height: 500px;""></div>
+       
     </div>
-</div>
 
+</div>
 <script>
+
+    function gettabledata() {
+        $.post("gettabledata", {
+            mysqdatabasename: $('#mysqdatabasename').html(),
+            sqltablesnames: $('#sqltablesnames').val()
+        },
+            function (data, status) {
+                $('#tblmysqldata').empty();
+                var aa = data;
+                JSONToHTMLTable(aa,"divmysqldata")     
+            });
+    }
+
+    function JSONToHTMLTable(jsonData, elementToBind) {
+
+        //This Code gets all columns for header   and stored in array col
+        var col = [];
+        for (var i = 0; i < jsonData.length; i++) {
+            for (var key in jsonData[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        //This Code creates HTML table
+        var table = document.createElement("table");
+        table.border=1;
+
+        //This Code gets rows for header created above.
+        var tr = table.insertRow(-1);
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");
+            th.innerHTML = col[i];
+            tr.appendChild(th);
+        }
+
+        //This Code adds data to table as rows
+        for (var i = 0; i < jsonData.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = jsonData[i][col[j]];
+            }
+        }
+
+        //This Code gets the all columns for header
+        var divContainer = document.getElementById(elementToBind);
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+    }
+
     function gettablenames() {
         $.post("gettablenames", {
-            cmd: 'version server'
+            mysqdatabasename: $('#mysqdatabasename').html()
         },
             function (data, status) {
                 $('#sqltablesnames').html('');
@@ -51,5 +112,5 @@
                 });
             });
     }
-  
+
 </script>

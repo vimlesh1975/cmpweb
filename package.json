@@ -26,8 +26,9 @@
     "tslib": "^2.1.0"
   },
   "scripts": {
-    "run1": "nodemon main"
+    "run": "nodemon main"
   },
-  "author": "",
+  "author": "vimlesh kumar",
+  "email": "vimlesh1975@hotmail.com",
   "license": "ISC"
 }
