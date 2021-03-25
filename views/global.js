@@ -560,9 +560,7 @@ socket.on('cpustatus', function (data) {
     $('#cpuuses').html('CPU uses: '+data.data1);
 })
 
-socket.on('vtrstatus', function (data) {
-    $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
-})
+
 
 socket.on('xdcamstatus', function (data) {
     $("#xdcamsoapclient1").contents().find("body").find("#xdcamstatus").html(data.data1);

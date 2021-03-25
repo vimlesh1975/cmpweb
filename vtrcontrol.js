@@ -1,15 +1,24 @@
 const SerialPort = require('serialport');
 // Promise approach
 var portName;
-var myPort;
-function portopen(_portName) {
-  SerialPort.list().then(ports => {
-    portName =_portName;// ports[0].path;// 'COM2';
+var myPort = SerialPort;
+var portopened = false;
 
+function getallcomports() {
+  SerialPort.list().then(ports => {
+    allcomports = ports;
     ports.forEach(function (port) {
       console.log(port.path);
     });
-    myPort = new SerialPort(portName, 38400);
+    io.emit('getallcomports', { data1: allcomports[0].path });
+  });
+}
+
+function portopen(_portName) {
+ 
+  if (!portopened) {
+    portName = _portName;// ports[0].path;// 'COM2';
+    myPort = new SerialPort(portName, 38400)
     let Readline = SerialPort.parsers.Readline; // make instance of Readline parser
     let parser = new Readline; // make a new parser to read ASCII lines
     myPort.pipe(parser); // pipe the serial stream to the parser
@@ -19,24 +28,23 @@ function portopen(_portName) {
     parser.on('data', readSerialData);
     myPort.on('close', showPortClose);
     myPort.on('error', showError);
-  });
+
+    setTimeout(() => {
+      console.log(myPort.isOpen);
+      portopened = myPort.isOpen;
+    }, 100);
+  }
 }
 
 //portopen("COM1");
 
 // setTimeout(() => {
-//   portclose()
+//   myPort.close();
 // }, 3000);
 
-function portclose(){
-  myPort.close();
-}
-
-
-
 function showPortOpen() {
-  console.log(portName +' port open');
-  io.emit('vtrstatus', { data1: "port open " });
+  console.log(portName + ' port open');
+  io.emit('vtrstatus', { data1: "port open" });
 }
 
 function readSerialData(data) {
@@ -46,12 +54,12 @@ function readSerialData(data) {
 
 function showPortClose() {
   console.log('port closed.');
-  io.emit('vtrstatus', { data1: "port closed " });
+  io.emit('vtrstatus', { data1: "port closed" });
 }
 
 function showError(error) {
   console.log('Serial port error: ' + error);
-  io.emit('vtrstatus', { data1: error.toString()});
+  io.emit('vtrstatus', { data1: error.toString() });
 }
 
 var gettc = String.fromCharCode(97) + String.fromCharCode(12) + String.fromCharCode(1) + String.fromCharCode(110);
@@ -59,16 +67,27 @@ var gettc = String.fromCharCode(97) + String.fromCharCode(12) + String.fromCharC
 function vtrcommand(a, b, c) {
   return (String.fromCharCode(a) + String.fromCharCode(b) + String.fromCharCode(c));
 }
+
+app.post('/frames/getallcomports', (req, res) => {
+  SerialPort.list().then(ports => {
+    ports.forEach(function (port) {
+      console.log(port.path);
+
+    });
+    io.emit('getallcomports', { data1: ports });
+  });
+  res.end();
+});
+
 app.post('/frames/portopen', (req, res) => {
   portopen(req.body.portname);
-  
   res.end();
 });
 
 
 app.post('/frames/portclose', (req, res) => {
   myPort.close();
-  
+  portopened=false;
   res.end();
 });
 
@@ -80,7 +99,6 @@ app.post('/frames/vtrgettc', (req, res) => {
 });
 app.post('/frames/vtrstop', (req, res) => {
   myPort.write(vtrcommand(32, 0, 32));//play
-  console.log(vtrcommand(32, 0, 32));
   io.emit('vtrstatus', { data1: "stop " });
   res.end();
 });
@@ -264,7 +282,4 @@ app.post('/frames/oneframeforward', (req, res) => {
   res.end();
 });
 
-// setInterval(() => { 
-//   myPort.write("1212121"+"\r\n"); 
-//   console.log("ll");
-// }, 1000);
+

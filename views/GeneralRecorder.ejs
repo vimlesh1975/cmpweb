@@ -6,12 +6,24 @@
   <iframe id="vtrcontrol1" style="position:fixed;left :700px;top:120px;height: 600px;width: 280px;border:0;"
     src="frames/vtrcontrol1.html"></iframe>
 </div>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
- 
-  // var socket = io();
-  // socket.on('vtrstatus', function (data) {
-  //   $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
-  //   //alert("vimlesh");
-  // })
+
+
+
+
+  //for vtr status start
+  var socket = io();
+  socket.on('vtrstatus', function (data) {
+    $("#vtrcontrol1").contents().find("body").find("#vtrstatus").html(data.data1);
+  })
+  socket.on('getallcomports', function (data) {
+    $("#vtrcontrol1").contents().find("body").find("#cmbports").html('');
+    (data.data1).forEach(element => {
+    $("#vtrcontrol1").contents().find("body").find("#cmbports").append(new Option(element.path, element.path));
+    })
+  })
+//for vtr status end
+
 </script>
