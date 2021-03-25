@@ -37,3 +37,13 @@ app.post('/gettabledata', (req, res) => {
     });
    
 });
+app.post('/gettabledatabyquery', (req, res) => {
+    var product = [];
+    con.query(req.body.query, function (err, result) {
+        if (err) throw err;  
+        res.send(result);
+        console.log("table data send!");
+    });
+   
+});
+

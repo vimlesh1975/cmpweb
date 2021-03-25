@@ -39,13 +39,30 @@
             </tr>
         </table>
         <br />
-        <button onclick='gettabledata()'>Get table data</button>
+        <button onclick='gettabledata()'>Get Table Data</button>   <button onclick='gettabledatabyquery()'>Get Query Data</button><input style="width: 400px;" id="querytext" type="text" value="select * from cmp.media">
+        <br />
+        <br />
         <div id="divmysqldata" style="overflow: scroll;height: 500px;""></div>
        
     </div>
 
 </div>
+<style>
+     #divmysqldata th{background-color: #62f30e;}
+   #divmysqldata tr:nth-child(even) {background-color: #cef3b8;}
+   #divmysqldata tr:nth-child(odd) {background-color: #f5afaf;}
+</style>
+
 <script>
+ function gettabledatabyquery() {
+        $.post("gettabledatabyquery", {
+            query: $('#querytext').val(),     
+        },
+            function (data, status) {
+                var aa = data;
+                JSONToHTMLTable(aa,"divmysqldata")     
+            });
+    }
 
     function gettabledata() {
         $.post("gettabledata", {
@@ -53,7 +70,6 @@
             sqltablesnames: $('#sqltablesnames').val()
         },
             function (data, status) {
-                $('#tblmysqldata').empty();
                 var aa = data;
                 JSONToHTMLTable(aa,"divmysqldata")     
             });
