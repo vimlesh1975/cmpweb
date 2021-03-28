@@ -8,6 +8,6 @@ open terminal
 give command as 
 npm i
 and then
-node main.js
+npm start
 
 open in chrome browser http://localhost:8080
