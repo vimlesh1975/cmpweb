@@ -92,7 +92,8 @@
 
         function transcode(str) {
             $.post("/transcode", {
-                cmd: str
+                cmd: str,
+                parameters:"['-b:v 10M', '-r 60']"
             },
             );
         }
