@@ -14,7 +14,7 @@ app.set('views', './views');
 app.use(express.static('views'));
 
 function middleware(req, res, next) {
-	console.log(req.url);
+	console.log(req.url + JSON.stringify(req.body));
 	next();
 }
 app.use(middleware);
@@ -160,7 +160,7 @@ http.listen(port, () => {
 			product.push([item.path])
 
 		})
-		//res.send(product);
+
 		res.send(product);
 	});
 

@@ -8,7 +8,7 @@
 
         <button type="button" onclick="playclipfromclipgridforanywhere()" class="btn btn-success">Play Clip</button>
 
-        <div style="position: absolute;left:425px">
+        <div style="position: absolute;left:525px">
             <button type="button" onclick="transcode($('tr.selected3 td:first').text())"
                 class="btn btn-success">Transcode</button>
 
@@ -17,13 +17,27 @@
             <button type="button" onclick="$.post('resumeffmpeg')" class="btn btn-success">Resume</button>
 
             <button type="button" onclick="$.post('killffmpeg')" class="btn btn-success">Kill</button>
-
             <br />
-            <table border=1 style="min-width: 750px;max-width: 775px;">
+            <table border=1 style="min-width: 700px;max-width: 700px;">
                 <colgroup>
                     <col span="1" style="width: 12%;">
                     <col span="1" style="width: 88%;">
                 </colgroup>
+
+                <tr>
+                    <td>transcodingParameters</td>
+                    <td id="transcodingParameter" contenteditable>-b:v 10M,-r 60</td>
+                </tr>
+
+                <tr>
+                    <td>Output Directory</td>
+                    <td id="OutputDirectory" contenteditable>d:/test/</td>
+                </tr>
+                <tr>
+                    <td>Filename</td>
+                    <td id="trascodedfilename" contenteditable>_trancoded.mxf</td>
+                </tr>
+
 
                 <tr>
                     <td>Original File</td>
@@ -92,14 +106,20 @@
         }
 
         function transcode(str) {
+            var aa = [];
+            aa = ($('#transcodingParameter').html()).split(",");
+
             $.post("/transcode", {
                 cmd: str,
-                dsdsd: 'hhhh',
-                parameter1: ['-b:v 10M','-r 60']
+                OutputDirectory: $('#OutputDirectory').html(),
+                trascodedfilename: $('#trascodedfilename').html(),
+                parameter1: aa// $('#transcodingParameter').val()//['-b:v 10M','-r 60']
             },
             );
         }
 
+
+        getfilesforanywhere("c:/casparcg/_media");
     </script>
 
 

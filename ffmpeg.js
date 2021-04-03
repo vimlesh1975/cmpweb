@@ -1,26 +1,28 @@
 const path = require('path');
 
 var ffmpeg = require('fluent-ffmpeg');
-var procffmpeg;
+// var procffmpeg;
 
 var numvideo = 0;
 let videos = [];
-let transcodingparametrs;
 
 app.post('/transcode', (req, res) => {
 	res.end();
-	videos.unshift(req.body.cmd);
-	numvideo += 1;
+	var videoname = req.body.cmd;
+	var trascodedfilename = req.body.trascodedfilename;
+	var OutputDirectory = req.body.OutputDirectory;
 	transcodingparametrs = req.body['parameter1[]'];
+	videos.unshift([videoname, transcodingparametrs, OutputDirectory, trascodedfilename]);
+	numvideo += 1;
 
 	if (numvideo == 1) { processVideos() }
 });
 
 function transcodeVideo(video) {
-	var filenamewithextension = video.split('\\').pop().split('/').pop();
+	var filenamewithextension = video[0].split('\\').pop().split('/').pop();
 	var filename = path.parse(filenamewithextension).name;
 	var p = new Promise((resolve, reject) => {
-		procffmpeg = ffmpeg(video)
+		procffmpeg = ffmpeg(video[0])
 			.on('end', function () {
 				resolve();
 				io.emit('transcodestatus', { data1: 'file has been converted succesfully' });
@@ -33,27 +35,21 @@ function transcodeVideo(video) {
 				try {
 					io.emit('trancodepercent1', { percent1: (data.percent).toFixed(0) })
 				}
-				catch
-				{
-
-				}
+				catch { }
 			})
 			.on('start', (data) => {
 				console.log(data);
-				io.emit('filenames', { originalfile1: video, transcodedfilename1: 'd:/test/' + filename + '_transcoded.mxf' });
+				io.emit('filenames', { originalfile1: video[0], transcodedfilename1: video[2] + filename + video[3] });
 			})
 			.on('stderr', function (stderrLine) {
 				io.emit('transcodestatus', { data1: stderrLine });
 			})
-
-			.outputOptions(transcodingparametrs)
-			.save('d:/test/' + filename + '_transcoded.mxf');
-
+			.outputOptions(video[1])
+			.save(video[2] + filename + video[3]);
 	});
 	return p;
 }
 function processVideos() {
-
 	let video = videos.pop();
 	if (video) {
 		transcodeVideo(video).then(() => {
