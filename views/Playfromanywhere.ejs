@@ -23,7 +23,7 @@
                 <colgroup>
                     <col span="1" style="width: 12%;">
                     <col span="1" style="width: 88%;">
-                 </colgroup>
+                </colgroup>
 
                 <tr>
                     <td>Original File</td>
@@ -36,7 +36,8 @@
 
                 <tr>
                     <td>progress:</td>
-                    <td><progress id="transcodeprogress1" value="0" max="100"> 0% </progress><span id="percentvalue1"> </span></td>
+                    <td><progress id="transcodeprogress1" value="0" max="100"> 0% </progress><span id="percentvalue1">
+                        </span></td>
                 </tr>
                 <tr>
                     <td>status:</td>
@@ -45,7 +46,7 @@
             </table>
 
             <br />
-        
+
         </div>
 
 
@@ -93,7 +94,8 @@
         function transcode(str) {
             $.post("/transcode", {
                 cmd: str,
-                parameters:"['-b:v 10M', '-r 60']"
+                dsdsd: 'hhhh',
+                parameter1: ['-b:v 10M','-r 60']
             },
             );
         }
